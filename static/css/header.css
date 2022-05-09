@@ -1,0 +1,242 @@
+body{
+    background-color: rgb(252, 248, 217);
+    margin:0;
+}
+body a:link{
+    text-decoration: none;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(168, 104, 228);
+    height: 70px;
+    width: 100%;
+}
+.home{
+    height: 100%;
+    width: 20%;
+}
+.home a{
+    display: flex;
+    flex-direction: row;
+}
+.home a:hover{
+    color: rgb(30, 7, 51);
+}
+.home img{
+    margin-left: 2%;
+    height: 65px;
+    width: 65px;
+}
+.icontext{
+    font-size: 24px;
+    align-self: center;
+}
+.Search{
+    display: flex;
+    align-items: center;
+
+    float: right;
+    height: 100%;
+    width: 420px;
+    margin-left: 15.5%;
+}
+.Search form{
+    float:left;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+}
+.searchbutton{
+    width:15%;
+    height: 100%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(107, 183, 255);
+    border:1px;
+    border-style: solid;
+    border-color: rgb(16, 16, 85);
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.searchbutton:hover{
+    background-color: rgb(80, 151, 218);
+}
+#searchbar{
+    width:85%;
+    height:100%;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(16, 16, 85);
+    font-size: 15px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.addbooklink{
+    margin-top: 0.7%;
+    margin-left: 5%;
+    border-radius: 30px;
+}
+.addbook{
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(16, 16, 85);
+    height: 50px;
+    width: 200px;
+    background-color: rgb(140, 198, 245);
+    border-radius: 30px;
+}
+
+.addbook:hover{
+    background-color: rgb(80, 151, 218);
+}
+.accountlink{
+    float: right;
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    margin-top: 0.5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.account{
+    height: 100%;
+    width: 100%;
+    border:3px;
+    border-style: solid;
+    border-color: rgb(0, 0, 14);
+    background-color: rgb(194, 191, 191);
+    border-radius: 30px;
+
+}
+.content {
+    min-height: 600px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+@media screen and (min-width: 1800px) {
+    .content{
+        min-height: 850px;
+    }
+    .header{
+        height:100px;
+    }
+    .Search{
+        width:500px;
+    }
+    .home img{
+        width:90px;
+        height:90px;
+    }
+    .icontext{
+        font-size: 37px;
+    }
+    .addbooklink{
+        margin-left: 10%;
+        width: 270px;
+        height: 67px;
+    }
+    .addbook{
+        font-size: 24px;
+        width: 100%;
+        height:100%;
+    }
+    .accountlink{
+        width:70px;
+        height:70px;
+    }
+    .account{
+        border-radius: 50px;
+    }
+}
+@media screen and (max-width: 900px) {
+
+    .content{
+        min-height: 1000px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .home{
+        width:30%;
+    }
+    .icontext{
+      font-size: 20px;
+    }
+    .Search{
+      margin-left: 5%;
+      width:300px;
+    }
+    .Search form{
+        width:100%;
+    }
+    .addbooklink{
+        margin-left: 2%;
+       margin-top:2%;
+       width: 100px;
+       height: 30px;
+    }
+    .addbook{
+        font-size: 10px;
+        width:100%;
+        height:100%;
+    }
+    .accountlink{
+        margin-left: 3%;
+        margin-right: 2%;
+        margin-top: 1%;
+        width: 45px;
+        height: 45px;
+
+    }
+    #searchbar{
+        width:75%;
+    }
+    .searchbutton{
+        width:25%;
+    }
+}
+@media screen and (max-width: 480px) {  
+    .content{
+        min-height: 700px;
+        grid-template-columns:1fr;
+    }
+    .home{
+        display: none;
+    }
+    .Search{
+        margin-left: 3%;
+        width:200px;
+    }
+    .Search form{
+        width:100%;
+    }
+    .addbooklink{
+        margin-left: 3%;
+        margin-top:5%;
+        width: 80px;
+        height: 30px;
+    }
+    .searchbutton{
+        font-size: 10px;
+    }
+    #searchbar{
+        width:75%;
+    }
+    .searchbutton{
+        width:25%;
+    }
+}
+@media screen and (max-width: 349px) {
+    .Search{
+        margin-left: 2%;
+    }
+}

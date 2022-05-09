@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/login.css">{% endblock %}
+
+{%block content%}
+    <div class="account">
+        <div class="avatar"></div>
+        <input type="file" name="image" >
+        <input type="submit" value="">
+        <div class="username"></div>
+    </div>
+{%endblock%}

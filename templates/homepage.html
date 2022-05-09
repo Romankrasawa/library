@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/content.css">{% endblock %}
+
+{%block content%}
+        {% for i in range(21) %}
+        
+            <div class="article">
+                <div class="photo">
+                    <img src="../static/image/image_3.jpg" alt="">
+                </div>
+                <div class="description">
+                    <div class="text">
+                        Автор:   <br>
+                    </div>
+                    <div class="text">
+                        Назва:   <br>
+                    </div>
+                    <div class="text">
+                        Рік видання:   <br>
+                    </div>
+                    <div class="text">
+                        Кількість сторінок:   <br>
+                    </div>
+                    <div class="text">
+                    Видавництво:    <br>
+                    </div>
+                </div>
+                <div class="code">
+                    <span>
+                        Код: 000001<br>
+                    </span>
+                    <a href="">
+                        <div class="chat">Обговорення</div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+{%endblock%}

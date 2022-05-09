@@ -1,0 +1,145 @@
+
+@media screen and (min-width: 1800px) {
+
+    .content{
+        min-height: 850px;
+    }
+    .header{
+        height:100px;
+    }
+    .Search{
+        width:500px;
+    }
+    .home img{
+        width:90px;
+        height:90px;
+    }
+    .icontext{
+        font-size: 37px;
+    }
+    .addbooklink{
+        margin-left: 10%;
+        width: 270px;
+        height: 67px;
+    }
+    .addbook{
+        font-size: 24px;
+        width: 100%;
+        height:100%;
+    }
+    .accountlink{
+        width:70px;
+        height:70px;
+    }
+    .account{
+        border-radius: 50px;
+    }
+    .article{
+        height:720px;
+    }
+    .code a{
+        margin-top: 2%;
+    }
+    .photo img{
+        width: 45%;
+    }
+    .text{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 900px) {
+    .icontext{
+        font-size: 20px;
+    }
+    .content{
+        min-height: 900px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .article{
+        height:420px;
+    }
+    .photo img{
+        width: 45%;
+    }
+    .text{
+        font-size: 10px;
+    }
+    .chat{
+        width: 120px;
+        height: 25px;
+    }
+    .code span{
+        font-size: 12px;
+    }
+    .code a{
+        margin-top: 0.5%;
+    }
+    .Search{
+        margin-left: 5%;
+    }
+    .Search form{
+        width:70%;
+    }
+    .Search a{
+        width:30%;
+    }
+    .addbooklink{
+        margin-left: 2%;
+        margin-top:2%;
+        width: 100px;
+        height: 30px;
+    }
+    .addbook{
+        font-size: 10px;
+        width:100%;
+        height:100%;
+    }
+    .accountlink{
+        margin-left: 3%;
+        margin-right: 2%;
+        margin-top: 1%;
+        width: 45px;
+        height: 45px;
+
+    }
+}
+@media screen and (max-width: 480px) {
+    
+    .content{
+        min-height: 610px;
+        grid-template-columns:1fr;
+    }
+    .text{
+        font-size: 9px;
+    }
+    .article{
+        height:400px;
+    }
+    .photo img{
+        width: 55%;
+    }
+    .home{
+        display: none;
+    }
+    .Search{
+        margin-left: 8%;
+        width:160px;
+    }
+    .Search form{
+        width:150px;
+    }
+    .addbooklink{
+        margin-left: 3%;
+        margin-top:5%;
+        width: 80px;
+        height: 30px;
+    }
+    .Search a button{
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 349px) {
+    .Search{
+        margin-left: 2%;
+    }
+}

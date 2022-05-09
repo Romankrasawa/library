@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    {% block css %}{% endblock %}
+    <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+    <div class="header">
+            <div class="home">
+                <a href="/home">
+                    <img src="../static/image/icon.png" alt="Icon">
+                    <div class="icontext">School Library</div>
+                </a>
+            </div>
+            <div class="Search">
+                <form action="search" method="POST">
+                    <input type="search" name="searchbar" id="searchbar" placeholder="Пошук">
+                    <input type="submit" value="Пошук" class="searchbutton">
+                </form>
+
+            </div>
+            <a href="" class="addbooklink">
+                <div class="addbook">
+                    Додати книгу 
+                </div>
+            </a>
+            <a href="/login" class="accountlink">
+                <div class="account">
+                
+                </div>
+            </a>
+    </div>
+    <div class="content">
+    
+    {% block content%}
+
+    {%endblock%}
+    </div>
+<div class="footer">
+
+</div>  
+</body>
+</html>
