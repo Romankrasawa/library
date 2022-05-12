@@ -1,6 +1,59 @@
 {% extends "base.html" %}
 
 {%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/chat.css">{% endblock %}
 
 {%block content%}
+<div class="chatcontainer">
+    <div class="information">
+        <div class="imagebook">
+            <img src="../static/image/image_3.jpg" alt="">
+        </div>
+        <div class="bookdescription">
+            <div class="text">
+                <p>Автор: Стівен Кінг</p>
+            </div>
+            <div class="text">
+                <p>Назва: Воно</p>
+            </div>
+            <div class="text">
+            <p>Рік видання: 1987</p>
+            </div>
+            <div class="text">
+             <p>Кількість сторінок:636</p>
+            </div>
+            <div class="text">
+            <p>Видавництво: New York Times</p>
+            </div>
+        </div>
+    </div>
+    <div class="chat">
+        <form action="/chat/code" method="POST">
+            <div class="addmassage">
+                <textarea name="massage" class="textmassage" maxlength="2500"></textarea>
+                <input type="submit" value="Опублікувати" class="public">   
+            </div>
+        </form>
+        <div class="allmassages">
+            {% for i in range(21)%}
+            <div class="message">
+                <div class="massagetext">                  
+                    {{text}}
+                </div>
+                <div class="messagedate">
+                    {{datetime}}
+                </div>
+            </div>
+            <div class="yourmessage">
+                <div class="massagetext">
+                    {{text}}
+                </div>
+                <div class="messagedate">
+                    {{datetime}}
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
 {%endblock%}

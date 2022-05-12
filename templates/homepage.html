@@ -4,34 +4,37 @@
 {% block css %}<link rel="stylesheet" href="../static/css/content.css">{% endblock %}
 
 {%block content%}
-        {% for i in range(21) %}
+        
+        {% for i in code %}
         
             <div class="article">
                 <div class="photo">
-                    <img src="../static/image/image_3.jpg" alt="">
+                    <div class="image">
+                        <img src="../static/image/image_3.jpg" alt="">
+                    </div>
                 </div>
                 <div class="description">
                     <div class="text">
-                        Автор:   <br>
+                        <p>Автор: Стівен Кінг</p>
                     </div>
                     <div class="text">
-                        Назва:   <br>
+                        <p>Назва: Воно</p>
                     </div>
                     <div class="text">
-                        Рік видання:   <br>
+                    <p>Рік видання: 1987</p>
                     </div>
                     <div class="text">
-                        Кількість сторінок:   <br>
+                     <p>Кількість сторінок:636</p>
                     </div>
                     <div class="text">
-                    Видавництво:    <br>
+                    <p>Видавництво: New York Times</p>
                     </div>
                 </div>
                 <div class="code">
                     <span>
-                        Код: 000001<br>
+                        Код: {{i}}<br>
                     </span>
-                    <a href="">
+                    <a href="/chat/{{i}}">
                         <div class="chat">Обговорення</div>
                     </a>
                 </div>

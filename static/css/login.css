@@ -4,6 +4,9 @@
     align-content: center;
 }
 .registrationform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border:1px;
     border-style: solid;
     border-color: blueviolet;
@@ -28,11 +31,11 @@
     background-color: rgb(205, 136, 245);
 }
 .loginform h1{
-    margin-left: 35%;
+    align-self: center;
     font-size: 50px; 
 }
 .registrationform h1{
-    margin-left: 27%;
+    align-self: center;
     font-size: 50px;
 }
 .inputfield{
@@ -63,12 +66,12 @@
 .registrationform a{
     font-weight: bold;
     margin-top: 2%;
-    margin-left: 38%;
+    align-self: center;
 }
 .loginform a{
     font-weight: bold;
     margin-top: 2%;
-    margin-left: 38%;
+    align-self: center;
 }
 @media screen and (min-width: 1800px) {
     .registrationform{
@@ -79,10 +82,10 @@
     }
     .loginform h1{
         margin-top: 12%;
-        margin-left: 42%;
+
     }
     .registrationform h1{
-        margin-left: 34%;
+
         margin-top: 8%;
     }
     .sumbitbutton{
@@ -116,10 +119,7 @@
     }
     .loginform h1{
         margin-top: 25%;
-        margin-left: 40%;
-    }
-    .loginform a{
-        margin-left: 35%;
+
     }
 
 }
@@ -137,27 +137,21 @@
     .loginform h1{
         font-size: 40px;
         margin-top: 25%;
-        margin-left: 30%;
+
     }
     .registrationform h1{
         font-size: 40px;
         margin-top: 25%;
-        margin-left: 10%;
-    }
-    .loginform a{
-        margin-left: 25%;
+
     }
 }
 @media screen and (max-width: 349px) {
     .loginform h1{
         font-size: 30px;
-        margin-left: 30%;
+
     }
     .registrationform h1{
         font-size: 30px;
-        margin-left: 16%;
-    }
-    .loginform a{
-        margin-left: 17%;
+
     }
 }

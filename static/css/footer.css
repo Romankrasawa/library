@@ -1,5 +1,6 @@
 
 .footer{
+    position: relative;
     margin-top: 15px;
     background-color: rgb(168, 104, 228);
     min-height: 120px;

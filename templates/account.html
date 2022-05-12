@@ -1,13 +1,25 @@
 {% extends "base.html" %}
 
 {%block title%}{{ title }}{%endblock%}
-{% block css %}<link rel="stylesheet" href="../static/css/login.css">{% endblock %}
+{% block css %}<link rel="stylesheet" href="../static/css/account.css">{% endblock %}
 
 {%block content%}
-    <div class="account">
-        <div class="avatar"></div>
-        <input type="file" name="image" >
-        <input type="submit" value="">
-        <div class="username"></div>
+    <div class="accountfield">
+        <div class="username"><h1>{{ user.capitalize() }}</h1></div>
+        <div class="avatar">
+
+        </div>
+        <form action="/account/{{ user }}/changeavatar" method="POST" class="changeavatar">  
+            <label class="custom-file-upload">
+                <input type="file" accept=".jpg, .jpeg, .png" name="loadavatar" id="loadavatar">
+                Загрузити аватар
+            </label>
+        <input type="submit" value="Змінити аватар" class="sumbitbutton">
+        </form>
+        <form action="/account/{{user}}/changepassword" method="POST" class="changepassword">
+        <input type="password" name="oldpassword" class="password" placeholder="Старий пароль">
+        <input type="password" name="newpassword" class="password" placeholder="Новий пароль">
+        <input type="submit" value="Змінити пароль" class="sumbitbutton">
+        </form>
     </div>
 {%endblock%}

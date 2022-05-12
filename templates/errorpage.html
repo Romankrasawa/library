@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/error.css">{% endblock %}
 
 {%block content%}
+<div class="main">
+    <div class="errrortext">Error 404</div>
+    <div class="errorimage">
+        <img src="../static/image/error.jpg" alt="">
+    </div>
+</div>
 {%endblock%}

@@ -1,0 +1,128 @@
+.content{
+    display:flex;
+    justify-content: center;
+
+}
+.accountfield{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 50px;
+    margin-top: 2.5%;
+    width: 50%;
+    height: 740px;
+    background-color: rgb(181, 109, 248);
+    border:1px;
+    border-style: solid;
+    border-color: rgb(59, 4, 85);
+}
+.avatar{
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    border-radius: 120px;
+    border:3px;
+    border-style: solid;
+    border-color: rgb(59, 4, 85);
+}
+.changeavatar{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.changepassword{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+}
+.username{
+    color:rgb(248, 120, 145);
+    text-shadow: 0px 0px 4px rgb(221, 90, 117);
+    margin-top: 1%;
+    font-size: 27px;
+}
+.password{
+    margin-top:3%;
+    height: 50px;
+    width: 98%;
+    border-radius: 20px;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(59, 4, 85);
+    font-size: 15px;
+    font-weight: bold;
+}
+.sumbitbutton{
+    font-size: 15px;
+    font-weight: bold;
+    margin-top:3%;
+    height: 60px;
+    width:300px;
+    border-radius: 20px;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(59, 4, 85);
+    background-color: rgb(93, 176, 253);
+}
+.sumbitbutton:hover{
+    background-color: rgb(50, 136, 216);
+}
+#loadavatar{
+    display:none;
+}
+.custom-file-upload{
+    padding-top: 5%;
+    padding-left: 20%;
+    margin-top: 2%;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(248, 120, 145);
+    border-radius: 10px;
+    font-weight: bold;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(85, 4, 24);
+}
+.custom-file-upload:hover{
+    background-color: rgb(221, 90, 117);
+}
+.addavatar{
+    height: 30px;
+    margin-top: 3%;
+}
+@media screen and (min-width: 1800px) {
+    .username{
+        margin-top: 0%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .accountfield{
+        width: 70%;
+    }
+    .avatar{
+        width:180px;
+        height:180px;
+        margin-bottom: 5%;
+    }
+    .username{
+        font-size: 22px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .accountfield{
+        width: 97%;
+    }
+    .sumbitbutton{
+        width:200px;
+    }
+    .username{
+        font-size: 16px;
+    }
+    .custom-file-upload{
+        padding-left: 0px;
+        width: 150px;
+    }
+}

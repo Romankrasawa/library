@@ -1,0 +1,206 @@
+.content{
+    display: flex;
+}
+.chatcontainer{
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-height: 97%;
+    background-color:rgb(214, 169, 255);
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 10%;
+    padding-bottom: 3.5%;
+    border-radius: 50px;
+}
+.information{
+    display: flex;
+    flex-direction: row;
+    min-height: 500px;
+    width: 100%;
+}
+.imagebook{
+    border:3px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    margin-left: 5.5%;
+    margin-right: 2.5%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    background-color: gray;
+    height: 420px;
+    width: 300px;
+    border-radius: 30px;
+}
+.imagebook img{
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+}
+.bookdescription{
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    background-color: rgb(225, 193, 255);
+    padding-left: 2%;
+    font-size: 30px;
+    margin-top: 3%;
+    padding-top: 2%;
+    width: 58%;
+    height: 76%;
+    border-radius: 20px;
+}
+.text{
+    margin-top: 4%;
+}
+.chat{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(187, 115, 253);
+    min-height: 350px;
+}
+.chat form{
+    width: 100%;
+    min-height:00px;
+}
+.addmassage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height:100%;
+
+}
+.textmassage{
+    position:relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70%;
+    resize: none;
+    height: 250px;
+    font-size: 20px;
+    min-height:auto;
+    background-color: rgb(253, 227, 227);
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 15px;
+    overflow:auto;
+}
+  
+p{
+    white-space: pre;
+}
+.public{
+    height: 100px;
+    width: 50%;
+    margin-bottom: 20px;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 30px;
+    background-color: rgb(132, 201, 247);
+    font-size: 25px;
+    font-weight: bold;
+}
+.public:hover{
+    background-color: rgb(70, 176, 247);
+}
+.allmassages{
+    min-height: 100px;
+    background-color: rgb(225, 193, 255);
+    padding-bottom: 25px;
+}
+.message{
+    float: left;
+    display: flex;
+    margin-top: 15px;
+    margin-left: 7px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width:85%;
+    max-width: 100%;
+    background-color: rgb(245, 232, 173);
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 30px;
+}
+.yourmessage{
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 15px;
+    margin-right: 7px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width:85%;
+    max-width: 100%;
+    background-color: rgb(126, 203, 255);
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 30px;
+}
+.massagetext{
+    margin-left: 2%;
+    width: 76%;
+    font-size: 15px; 
+    overflow: hidden;
+}
+.messagedate{
+    margin-left: 2%;
+    margin-right: 2%;
+    align-self: center;
+}
+@media screen and (min-width: 1800px) {
+    .information{
+        height: 700px;
+    }
+    .imagebook{
+        height: 80%;
+        width: 25%;
+    }
+    .bookdescription{
+        font-size: 42px;
+        height: 75%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .information{
+        flex-direction: column;
+        align-items: center;
+    }
+    .bookdescription{
+        width: 95%;
+    }
+    .bookdescription{
+        font-size: 23px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .chatcontainer{
+        width:95%;
+        margin-left: 2.5%;
+    }
+    .bookdescription{
+        font-size: 15px;
+    }
+    .public{
+        width: 80%;
+    }
+
+}
+@media screen and (max-width: 390px) {
+    .imagebook{
+        width: 220px;
+        height:310px;
+    }
+    .bookdescription{
+        font-size: 11px;
+    }
+
+}
