@@ -1,0 +1,52 @@
+.content{
+    display:flex;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 1200px;
+    width: 100%;
+}
+.errrortext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    font-size: 50px;
+    font-weight: bold;
+    color: darkslateblue;
+}
+.errorimage{
+    width: 800px;
+
+}
+.errorimage img{
+    width: 100%;
+}
+@media screen and (max-width: 900px) {
+    .main{
+        height: 800px;
+    }
+    .errorimage{
+        width: 500px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .main{
+        height: 600px;
+    }
+    .errorimage{
+        width: 300px;
+    }
+}
+@media screen and (max-width: 349px) {
+    .main{
+        height: 400px;
+    }
+    .errorimage{
+        width: 250px;
+    }
+}
