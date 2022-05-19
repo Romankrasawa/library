@@ -25,16 +25,23 @@ class FDataBase:
 
 
     def add_book(self, name, author, years, pages, company, image):
+        book_id = 0
+        self._cur.execute("SELECT MAX(book_id) FROM book")
+        for i in self._cur.fetchone():
+            if i == None:
+                book_id =str(1).zfill(6)
+            else:
+                book_id = str(int(i.lstrip("0"))+1).zfill(6)
         if not image:
             try:
-                self._cur.execute('INSERT INTO book (name, pages, author, year, company) VALUES (?,?,?,?,?);',(name, pages, author, years, company))
+                self._cur.execute('INSERT INTO book (book_id, name, pages, author, year, company) VALUES (?,?,?,?,?,?);',(book_id, name, pages, author, years, company))
             except:
                 print("llloooooollll")
                 return False
         else:
             try:
                 binary = sqlite3.Binary(image)
-                self._cur.execute('INSERT INTO book (name, pages, author, year, company, book_photo) VALUES (?,?,?,?,?,?);', (name, pages, author, years, company, binary))
+                self._cur.execute('INSERT INTO book (book_id, name, pages, author, year, company, book_photo) VALUES (?,?,?,?,?,?,?);', (book_id, name, pages, author, years, company, binary))
             except:
                 return False
         self._db.commit()
@@ -43,11 +50,12 @@ class FDataBase:
 
 
     def search(self, searchbar):
+
         sql = f"SELECT * FROM book WHERE name LIKE \'%{searchbar}%\';"
         try:
-            print(sql)
             self._cur.execute(sql)
             result = self._cur.fetchall()
+            print(result)
             print("search completed")
             return result
         except:
@@ -56,7 +64,7 @@ class FDataBase:
 
 
     def search_id(self, searchid):
-        sql = f"SELECT * FROM book WHERE book_id = {searchid};"
+        sql = f"SELECT * FROM book WHERE book_id = \"{searchid}\";"
         try:
             print(sql)
             self._cur.execute(sql)
@@ -109,13 +117,12 @@ class FDataBase:
 
 
     def getpicture(self, id):
-        sql= f'SELECT book_photo FROM book WHERE book_id = {id}'
+        sql= f'SELECT book_photo FROM book WHERE book_id = \"{id}\"'
         try:
              self._cur.execute(sql)
              res = self._cur.fetchone()
              if res:
                  for i in res:
-                    print(i)
                     return i
         except sqlite3.Error as e:
              print("error БД:" + str(e))
