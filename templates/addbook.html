@@ -5,14 +5,14 @@
 
 {%block content%}
     <div class="addbookform">
-        <form action="\addbook" method="post">
+        <form action="\addbook" method="post" enctype="multipart/form-data">
             <label class="custom-file-upload">
                 Загрузити обкладинку
-                <input type="file" accept=".jpg, .jpeg, .png" name="cover" id="loadcover">
+                <input type="file" accept=".jpg, .jpeg, .png" name="cover" id="loadcover" >
             </label>
             <input type="text" name="author" class="adddescription" placeholder="Автор" required>
             <input type="text" name="name" class="adddescription" placeholder="Назва книги" required>
-            <input type="number" name="year" class="adddescription" placeholder="Рік видання" required min="0">
+            <input type="number" name="years" class="adddescription" placeholder="Рік видання" required min="0">
             <input type="number" name="pages" class="adddescription" placeholder="Кількість сторінок" required min="0">
             <input type="text" name="company" class="adddescription" placeholder="Видавництво" required>
             <input type="submit" value="Змінити пароль" class="sumbitbutton">

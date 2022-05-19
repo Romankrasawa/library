@@ -7,49 +7,51 @@
 <div class="chatcontainer">
     <div class="information">
         <div class="imagebook">
-            <img src="../static/image/image_3.jpg" alt="">
+            {%for i in description%}
+            <img src="{{url_for('showpicture', id = i['book_id'])}}" alt="">
         </div>
         <div class="bookdescription">
             <div class="text">
-                <p>Автор: Стівен Кінг</p>
+                <p>Автор: {{i["author"]}}</p>
             </div>
             <div class="text">
-                <p>Назва: Воно</p>
+                <p>Назва: {{i["name"]}}</p>
             </div>
             <div class="text">
-            <p>Рік видання: 1987</p>
+            <p>Рік видання: {{i["years"]}}</p>
             </div>
             <div class="text">
-             <p>Кількість сторінок:636</p>
+             <p>Кількість сторінок:{{i["pages"]}}</p>
             </div>
             <div class="text">
-            <p>Видавництво: New York Times</p>
+            <p>Видавництво: {{i["company"]}}</p>
             </div>
+            {%endfor%}
         </div>
     </div>
     <div class="chat">
-        <form action="/chat/code" method="POST">
+        <form action="/chat/{{id}}" method="POST">
             <div class="addmassage">
                 <textarea name="massage" class="textmassage" maxlength="2500"></textarea>
                 <input type="submit" value="Опублікувати" class="public">   
             </div>
         </form>
         <div class="allmassages">
-            {% for i in range(21)%}
+            {% for i in massages%}
             <div class="message">
                 <div class="massagetext">                  
-                    {{text}}
+                    {{i["text"]}}
                 </div>
                 <div class="messagedate">
-                    {{datetime}}
+                    {{i["time"]}}
                 </div>
             </div>
             <div class="yourmessage">
                 <div class="massagetext">
-                    {{text}}
+                    {{i["text"]}}
                 </div>
                 <div class="messagedate">
-                    {{datetime}}
+                    {{i["time"]}}
                 </div>
             </div>
             {%endfor%}

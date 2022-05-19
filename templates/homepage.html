@@ -5,36 +5,36 @@
 
 {%block content%}
         
-        {% for i in code %}
+        {% for i in description %}
         
             <div class="article">
                 <div class="photo">
                     <div class="image">
-                        <img src="../static/image/image_3.jpg" alt="">
+                        <img src="{{url_for('showpicture', id = i['book_id'])}}" alt="">
                     </div>
                 </div>
                 <div class="description">
                     <div class="text">
-                        <p>Автор: Стівен Кінг</p>
+                        <p>Автор: {{i["author"]}}</p>
                     </div>
                     <div class="text">
-                        <p>Назва: Воно</p>
+                        <p>Назва: {{i["name"]}}</p>
                     </div>
                     <div class="text">
-                    <p>Рік видання: 1987</p>
+                    <p>Рік видання: {{i["year"]}}</p>
                     </div>
                     <div class="text">
-                     <p>Кількість сторінок:636</p>
+                     <p>Кількість сторінок:{{i["pages"]}}</p>
                     </div>
                     <div class="text">
-                    <p>Видавництво: New York Times</p>
+                    <p>Видавництво: {{i["company"]}}</p>
                     </div>
                 </div>
                 <div class="code">
                     <span>
-                        Код: {{i}}<br>
+                        Код: {{i["book_id"]}}<br>
                     </span>
-                    <a href="/chat/{{i}}">
+                    <a href="/chat/{{i['book_id']}}">
                         <div class="chat">Обговорення</div>
                     </a>
                 </div>
