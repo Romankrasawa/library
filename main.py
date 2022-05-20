@@ -54,8 +54,6 @@ def load_user(user_id):
 @app.route("/")
 def home():
     print(current_user)
-    if current_user.get_id() == None:
-        print("bad")
     db = get_db()
     dbase = FDataBase(db)
     return render_template("homepage.html", title="School Library Home", description = dbase.home_books())
@@ -170,8 +168,11 @@ def login():
             print(userlogin)
             login_user(userlogin)
             print("okey")
-            return redirect(url_for('home'))
-    return render_template("login.html", title="Log in")
+            return redirect(url_for('account'))
+    if current_user.get_id() == None:
+        return render_template("login.html", title="Log in")
+    else:
+        return redirect(url_for('account'))
 
 
 
