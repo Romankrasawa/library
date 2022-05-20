@@ -4,11 +4,11 @@
 {% block css %}<link rel="stylesheet" href="../static/css/login.css">{% endblock %}
 
 {%block content%}
-    <form action="/login" method="POST" class="loginform">
+    <form action="{{url_for('login')}}" method="POST" class="loginform">
       <h1>Вхід</h1>
-      <input type="text" name="username" class="inputfield" placeholder="Username" required maxlength="18">
-      <input type="password" name="password" class="inputfield" placeholder="Password" required maxlength="25">
-       <input type="submit" class="sumbitbutton" value="Увійти">
-      <a href="register">Зареєструватися</a>
+      <input type="text" name="email" class="inputfield" placeholder="Email" required>
+      <input type="password" name="password" class="inputfield" placeholder="Password" required>
+      <input type="submit" class="sumbitbutton" value="Увійти">
+      <a href="{{url_for('register')}}">Зареєструватися</a>
     </form>
 {%endblock%}

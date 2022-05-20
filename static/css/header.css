@@ -96,7 +96,11 @@ body a:link{
 }
 
 .addbook:hover{
-    background-color: rgb(80, 151, 218);
+    border:2px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 30px;
+    background-color: rgb(85, 161, 233);
 }
 .accountlink{
     float: right;
@@ -110,12 +114,34 @@ body a:link{
 .account{
     height: 100%;
     width: 100%;
-    border:3px;
+    border:2px;
     border-style: solid;
     border-color: rgb(0, 0, 14);
     background-color: rgb(194, 191, 191);
     border-radius: 30px;
+    overflow: hidden;
 
+}
+.account img{
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width:100%;
+    border-radius: 30px;
+}
+.account:hover{
+    border:3px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 30px;
+}
+.searchtitle{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchtitle h1{
+    color: rgb(113, 74, 150);
 }
 .content {
     min-height: 600px;

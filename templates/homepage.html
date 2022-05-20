@@ -2,7 +2,9 @@
 
 {%block title%}{{ title }}{%endblock%}
 {% block css %}<link rel="stylesheet" href="../static/css/content.css">{% endblock %}
-
+{%block search%}
+<h1>Топ {{description|length}} найпопулярніших книг</h1>
+{%endblock%}
 {%block content%}
         
         {% for i in description %}
@@ -31,12 +33,15 @@
                     </div>
                 </div>
                 <div class="code">
-                    <span>
+                    <div class="id">
                         Код: {{i["book_id"]}}<br>
-                    </span>
+                    </div>
                     <a href="/chat/{{i['book_id']}}">
                         <div class="chat">Обговорення</div>
                     </a>
+                    <div class="views">
+                        {{i["view"]}}<br>
+                    </div>
                 </div>
             </div>
         {% endfor %}

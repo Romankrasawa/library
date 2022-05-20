@@ -56,6 +56,19 @@
 .text{
     margin-top: 4%;
 }
+.addfavourite{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#favorite{
+    background-color: rgb(255, 174, 190);
+    width:100%;
+}
+#favorite:hover{
+    background-color: rgb(250, 123, 148);
+}
 .chat{
     display: flex;
     flex-direction: column;
@@ -110,19 +123,26 @@ p{
     background-color: rgb(70, 176, 247);
 }
 .allmassages{
+    display: flex;
+    flex-direction: column-reverse;
     min-height: 100px;
     background-color: rgb(225, 193, 255);
     padding-bottom: 25px;
 }
-.message{
+.massage{
+    min-height:63px;
+    width:100%;
+}
+.someonemessage{
     float: left;
     display: flex;
     margin-top: 15px;
     margin-left: 7px;
     padding-top: 10px;
+    padding-left: 10px;
     padding-bottom: 5px;
-    width:85%;
-    max-width: 100%;
+    min-width: 15%;
+    max-width:85%;
     background-color: rgb(245, 232, 173);
     border:1px;
     border-style: solid;
@@ -130,6 +150,7 @@ p{
     border-radius: 30px;
 }
 .yourmessage{
+    padding-right: 10px;
     float: right;
     display: flex;
     flex-direction: row-reverse;
@@ -137,8 +158,8 @@ p{
     margin-right: 7px;
     padding-top: 10px;
     padding-bottom: 5px;
-    width:85%;
-    max-width: 100%;
+    min-width: 15%;
+    max-width:85%;
     background-color: rgb(126, 203, 255);
     border:1px;
     border-style: solid;
@@ -147,11 +168,12 @@ p{
 }
 .massagetext{
     margin-left: 2%;
-    width: 76%;
+    max-width: 80%;
     font-size: 15px; 
     overflow: hidden;
 }
 .messagedate{
+    height: 100%;
     margin-left: 2%;
     margin-right: 2%;
     align-self: center;

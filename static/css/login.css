@@ -13,6 +13,8 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 4%;
     width:50%;
     height:500px;
@@ -25,6 +27,8 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 4%;
     width:50%;
     height:500px;
@@ -43,8 +47,7 @@
     border-style: solid;
     border-color: blueviolet;
     border-radius: 10px;
-    margin-bottom: 5%;
-    margin-left: 5%;
+    margin-bottom: 1.5%;
     width: 90%;
     height: 40px;
     font-size: 20px;
@@ -55,7 +58,6 @@
     border-style: solid;
     border-color: blueviolet;
     border-radius: 10px;
-    margin-left: 24%;
     width: 50%;
     height: 50px;
     background-color: rgb(116, 182, 245);

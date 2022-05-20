@@ -5,9 +5,9 @@
 
 {%block content%}
     <div class="accountfield">
-        <div class="username"><h1>{{ user.capitalize() }}</h1></div>
+        <div class="username"><h1>{{ user.get_username() }}</h1></div>
         <div class="avatar">
-
+            <img src="/avatar" alt="">
         </div>
         <form action="/account/{{ user }}/changeavatar" method="POST" class="changeavatar">  
             <label class="custom-file-upload">
