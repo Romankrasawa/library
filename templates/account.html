@@ -9,12 +9,12 @@
         <div class="avatar">
             <img src="/avatar" alt="">
         </div>
-        <form action="/account/{{ user }}/changeavatar" method="POST" class="changeavatar">  
+        <form action="/account/changeavatar" method="POST" class="changeavatar" enctype="multipart/form-data">
             <label class="custom-file-upload">
                 <input type="file" accept=".jpg, .jpeg, .png" name="loadavatar" id="loadavatar">
                 Загрузити аватар
             </label>
-        <input type="submit" value="Змінити аватар" class="sumbitbutton">
+            <input type="submit" value="Змінити аватар" class="sumbitbutton">
         </form>
         <form action="/account/{{user}}/changepassword" method="POST" class="changepassword">
         <input type="password" name="oldpassword" class="password" placeholder="Старий пароль">

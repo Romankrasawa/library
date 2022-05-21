@@ -34,28 +34,34 @@
     height: 420px;
     width: 300px;
     border-radius: 30px;
+    overflow: hidden;
 }
 .imagebook img{
     height: 100%;
     width: 100%;
+    object-fit: cover;
+    object-position: center;
     border-radius: 30px;
 }
 .bookdescription{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border:1px;
+
     border-style: solid;
     border-color: rgb(45, 17, 90);
     background-color: rgb(225, 193, 255);
     padding-left: 2%;
-    font-size: 30px;
+    font-size: 20px;
     margin-top: 3%;
     padding-top: 2%;
     width: 58%;
     height: 76%;
     border-radius: 20px;
 }
-.text{
-    margin-top: 4%;
-}
+
 .addfavourite{
     display: flex;
     align-items: center;
@@ -187,7 +193,7 @@ p{
         width: 25%;
     }
     .bookdescription{
-        font-size: 42px;
+        font-size: 30px;
         height: 75%;
     }
 }
@@ -200,7 +206,12 @@ p{
         width: 95%;
     }
     .bookdescription{
-        font-size: 23px;
+        font-size: 17px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .bookdescription{
+        font-size: 15px;
     }
 }
 @media screen and (max-width: 480px) {
@@ -209,7 +220,7 @@ p{
         margin-left: 2.5%;
     }
     .bookdescription{
-        font-size: 15px;
+        font-size: 12px;
     }
     .public{
         width: 80%;
@@ -222,7 +233,7 @@ p{
         height:310px;
     }
     .bookdescription{
-        font-size: 11px;
+        font-size: 10px;
     }
 
 }

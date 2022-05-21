@@ -5,9 +5,9 @@
 
 {%block content%}
 <div class="chatcontainer">
+    {%for i in description%}
     <div class="information">
         <div class="imagebook">
-            {%for i in description%}
             <img src="{{url_for('showpicture', id = i['book_id'])}}" alt="">
         </div>
         <div class="bookdescription">
@@ -26,16 +26,15 @@
             <div class="text">
             <p>Видавництво: {{i["company"]}}</p>
             </div>
-            {%endfor%}
         </div>
     </div>
-    {%if current_user%}
+    {%if i["user_id"] == current_user%}
     <div class="addfavourite">
-        <form action="/addtofavorite/{{id}}" method="Post">
-            <input type="submit" value="Додати до улюблених" class="public" id ="favorite">
-        </form>
+        
+           <a href="/changebook/{{id}}"><input type="button" value="Змінити книгу" class="public" id ="favorite"></a>
     </div>
     {%endif%}
+    {%endfor%}
     <div class="chat">
         <form action="/addmassage/{{id}}" method="POST">
             <div class="addmassage">
@@ -45,10 +44,10 @@
         </form>
         <div class="allmassages">
             {% for i in massages%}
-                {%if i["user_id"] != current_user%}
+                {%if i["user_id"] == current_user%}
                 <div class="massage">
-                    <div class="someonemessage">
-                        <div class="massagetext">                  
+                    <div class="yourmessage">
+                        <div class="massagetext">
                             {{i["text"]}}
                         </div>
                         <div class="messagedate">
@@ -58,8 +57,8 @@
                 </div>
                 {%else%}
                 <div class="massage">
-                    <div class="yourmessage">
-                        <div class="massagetext">
+                    <div class="someonemessage">
+                        <div class="massagetext">                  
                             {{i["text"]}}
                         </div>
                         <div class="messagedate">

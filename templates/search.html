@@ -67,7 +67,11 @@
 {%endblock%}
 {%block pagination%}
 {%if pages > 1:%}
+    {%if current_page > 1:%}
         <a href="/search={{searchthing}}:sort={{sort}}/page={{prev}}" class="page"><div>Prew</div></a>
+    {%endif%}
+    {%if current_page < pages:%}
         <a href="/search={{searchthing}}:sort={{sort}}/page={{next}}" class="page"><div>Next</div></a>
+    {%endif%}
 {%endif%}
 {%endblock%}

@@ -10,12 +10,12 @@
                 Загрузити обкладинку
                 <input type="file" accept=".jpg, .jpeg, .png" name="cover" id="loadcover" >
             </label>
-            <input type="text" name="author" class="adddescription" placeholder="Автор" required>
-            <input type="text" name="name" class="adddescription" placeholder="Назва книги" required>
-            <input type="number" name="years" class="adddescription" placeholder="Рік видання" required min="0">
-            <input type="number" name="pages" class="adddescription" placeholder="Кількість сторінок" required min="0">
-            <input type="text" name="company" class="adddescription" placeholder="Видавництво" required>
-            <input type="submit" value="Змінити пароль" class="sumbitbutton">
+            <input type="text" name="author" class="adddescription" placeholder="Автор" required maxlength="25">
+            <input type="text" name="name" class="adddescription" placeholder="Назва книги" required maxlength="40">
+            <input type="number" name="years" class="adddescription" placeholder="Рік видання" required min="0"  max="{{current_year}}">
+            <input type="number" name="pages" class="adddescription" placeholder="Кількість сторінок" required min="0" max="1500">
+            <input type="text" name="company" class="adddescription" placeholder="Видавництво" required maxlength="30">
+            <input type="submit" value="Додати книгу" class="sumbitbutton">
         </form>
     </div>
 {%endblock%}

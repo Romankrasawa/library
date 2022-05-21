@@ -50,10 +50,10 @@
     border:1px;
     border-style: solid;
     border-color: rgb(59, 4, 85);
-    background-color: rgb(93, 176, 253);
+    background-color: rgb(136, 218, 149);
 }
 .sumbitbutton:hover{
-    background-color: rgb(50, 136, 216);
+    background-color: rgb(77, 190, 96);
 }
 .custom-file-upload{
     padding-top: 4%;
@@ -62,7 +62,7 @@
     margin-top: 2%;
     width: 200px;
     height: 40px;
-    background-color: rgb(248, 120, 145);
+    background-color: rgb(93, 176, 253);
     border-radius: 10px;
     font-weight: bold;
     border:1px;
@@ -70,7 +70,13 @@
     border-color: rgb(85, 4, 24);
 }
 .custom-file-upload:hover{
-    background-color: rgb(221, 90, 117);
+    background-color: rgb(50, 136, 216);
+}
+#delete{
+    background-color: rgb(245, 71, 71);
+}
+#delete:hover{
+    background-color: rgb(214, 55, 55);
 }
 @media screen and (min-width: 1800px) {
     .username{

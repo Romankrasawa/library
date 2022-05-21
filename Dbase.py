@@ -24,7 +24,7 @@ class FDataBase:
 
 
 
-    def add_book(self, name, author, years, pages, company, image):
+    def add_book(self, name, author, years, pages, company, image, user_id):
         book_id = 0
         self._cur.execute("SELECT MAX(book_id) FROM book")
         for i in self._cur.fetchone():
@@ -34,16 +34,43 @@ class FDataBase:
                 book_id = str(int(i.lstrip("0"))+1).zfill(6)
         try:
             binary = sqlite3.Binary(image)
-            self._cur.execute('INSERT INTO book (book_id, name, pages, author, year, company, book_photo) VALUES (?,?,?,?,?,?,?);', (book_id, name, pages, author, years, company, binary))
-        except:
+            print(binary)
+            self._cur.execute('INSERT INTO book (book_id, name, pages, author, year, company, book_photo, user_id, search_name) VALUES (?,?,?,?,?,?,?,?,?);', (book_id, name, pages, author, years, company, binary,user_id, name.lower()))
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
             return False
         self._db.commit()
         print("book was added")
+        return True, book_id
+
+    def change_book(self, name, author, years, pages, company,book_id, image=None):
+        try:
+            if image == None:
+                self._cur.execute('UPDATE book SET name=?, pages=?, author=?, year=?, company=?  WHERE book_id = ?;', (name, pages, author, years, company, book_id))
+            else:
+                binary = sqlite3.Binary(image)
+                print(image)
+                self._cur.execute('UPDATE book SET name=?, pages=?, author=?, year=?, company=?, book_photo=?  WHERE book_id = ?;', (name, pages, author, years, company, image, book_id))
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+            return False
+        self._db.commit()
+        print("book changed")
         return True
 
+    def delete_book(self,book_id):
+        try:
+            print(book_id)
+            self._cur.execute(f"DELETE FROM book WHERE book_id = \"{book_id}\";")
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+            return False
+        self._db.commit()
+        print("book deleted")
+        return True
 
     def search_id(self, searchbar):
-        sql = f"SELECT * FROM book WHERE book_id = \'{searchbar}\';"
+        sql = f"SELECT * FROM book WHERE book_id = \'{searchbar}\' LIMIT 1;"
         try:
             self._cur.execute(sql)
             result = self._cur.fetchall()
@@ -56,7 +83,7 @@ class FDataBase:
 
 
     def search(self, searchid,sort, page):
-        sql = f"SELECT * FROM book WHERE name LIKE \"%{searchid}%\";"
+        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid.lower()}%\";"
         try:
             print(sql)
             self._cur.execute(sql)
@@ -66,7 +93,7 @@ class FDataBase:
             print("error БД")
         sort = sort.replace('-', ' ')
         print(sort)
-        sql = f"SELECT * FROM book WHERE name LIKE \"%{searchid}%\" ORDER BY {sort} LIMIT 3 OFFSET {(int(page)-1)*3};"
+        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid.lower()}%\" ORDER BY {sort} LIMIT 3 OFFSET {(int(page)-1)*3};"
         try:
             print(sql)
             self._cur.execute(sql)
@@ -93,7 +120,7 @@ class FDataBase:
             self._cur.execute(f"SELECT*FROM user WHERE user_id={user_id} LIMIT 1")
             res = self._cur.fetchone()
             if not res:
-                print("Пользователь не найден")
+                print("dosnt founded")
                 return False
             return res
         except sqlite3.Error as e:
@@ -106,14 +133,14 @@ class FDataBase:
             res = self._cur.fetchone()
             print(res)
             if not res:
-                print("Пользователь не найден")
+                print("dosnt founded")
                 return False
             for i in res:
                 print(i)
 
             return res
         except sqlite3.Error as e:
-            print("Ошибка получения данных из БД" + str(e))
+            print("error БД" + str(e))
         return False
 
     def addview(self, id):
@@ -129,6 +156,17 @@ class FDataBase:
             self._cur.execute("UPDATE book SET view = ? WHERE book_id = ?", (book_view,id))
             self._db.commit()
             print("view updated")
+            return True
+        except sqlite3.Error as e:
+            print("errorrr БД:" + str(e))
+            return False
+    def updateavatar(self,image, user_id):
+        try:
+            binary = sqlite3.Binary(image)
+            print(binary)
+            self._cur.execute("UPDATE user SET avatar = ? WHERE user_id = ?", (image, user_id))
+            self._db.commit()
+            print("avatar updated")
             return True
         except sqlite3.Error as e:
             print("errorrr БД:" + str(e))

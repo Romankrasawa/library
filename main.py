@@ -20,6 +20,7 @@ app.config.from_object(__name__)
 app.config.update(dict(DATABASE=os.path.join(app.root_path,'site.db')))
 
 login_manager=LoginManager(app)
+login_manager.login_view = "login"
 
 def connect_db():
     conn = sqlite3.connect(app.config["DATABASE"])
@@ -75,6 +76,11 @@ def showavatar():
 @app.errorhandler(404)
 def errorpage(error) :
     return render_template("errorpage.html", title="Error 404")
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 
 
 
@@ -140,7 +146,7 @@ def searchthing(searchbar,sort, page):
     pages = ceil(paging / 3)
     next = int(page) + 1 if int(page) < pages else page
     prev = int(page) -1 if int(page) > 1 else 1
-    return render_template("search.html", title=f"{searchbar}".replace('_', ' '), search = search_, searchthing = searchbar, searching = paging, pages = pages, next = next, prev = prev, sort =sort)
+    return render_template("search.html", title=f"{searchbar}".replace('_', ' '), search = search_, searchthing = searchbar, searching = paging, pages = pages, next = next, prev = prev, sort =sort, current_page=int(page))
 
 
 
@@ -192,24 +198,65 @@ def errorpage():
 @app.route("/addbook", methods = ['POST','GET'])
 @login_required
 def addbook():
-    logout_user()
     if request.method == "POST":
         db = get_db()
         dbase = FDataBase(db)
-        if not request.files["cover"].read():
+        if not request.files["cover"]:
             with open("static/image/deffault_cover.png", "rb") as img:
                 image = img.read()
         else:
-            image = request.files["cover"].read()
-        if dbase.add_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], image):
-            return redirect("home")
-    return render_template("addbook.html", title="Add book")
+            image = request.files['cover'].read()
+        print(image)
+        result, book_id = dbase.add_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], image, current_user.get_id())
+        print(result,book_id)
+        if result:
+            return redirect((url_for("chat", code = book_id)))
+    return render_template("addbook.html", title="Add book", current_year =datetime.datetime.now().strftime("%Y"))
 
+@app.route("/changebook/<id>", methods = ['POST','GET'])
+@login_required
+def changebook(id):
+    db = get_db()
+    dbase = FDataBase(db)
+    description = dbase.search_id(id)
+    user_id = 0
+    for i in description:
+        user_id = i["user_id"]
+    if request.method == "POST":
+        if not request.files["cover"]:
+            result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id)
+        else:
+            result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id, image = request.files['cover'].read())
+        if result:
+            return redirect(url_for("chat", code=id))
+    if description and user_id == current_user.get_id():
+        return render_template("changebook.html", title="Add book", current_year =datetime.datetime.now().strftime("%Y") , information = description, id =id)
+    else:
+        return redirect("/home")
 
+@app.route("/deletebook/<id>", methods = ['POST','GET'])
+@login_required
+def deletebook(id):
+    db = get_db()
+    dbase = FDataBase(db)
+    description = dbase.search_id(id)
+    user_id = 0
+    for i in description:
+        user_id = i["user_id"]
+    if user_id == current_user.get_id():
+        dbase.delete_book(id)
+        print('deleted')
+    return redirect("/home")
 
-@app.route("/account/<username>/changeavatar")
-def changeavatar(username):
-    return render_template("account.html", title="Account", user=username)
+@app.route("/account/changeavatar", methods = ['POST'])
+def changeavatar():
+    if request.method == "POST":
+        db = get_db()
+        dbase = FDataBase(db)
+        if request.files["loadavatar"]:
+            dbase.updateavatar( request.files["loadavatar"].read(), current_user.get_id())
+            print("suuuuuuuppppppppeeeeeerrrr")
+    return redirect("/account")
 
 
 
