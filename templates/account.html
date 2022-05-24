@@ -9,17 +9,18 @@
         <div class="avatar">
             <img src="/avatar" alt="">
         </div>
-        <form action="/account/changeavatar" method="POST" class="changeavatar" enctype="multipart/form-data">
-            <label class="custom-file-upload">
-                <input type="file" accept=".jpg, .jpeg, .png" name="loadavatar" id="loadavatar">
-                Загрузити аватар
-            </label>
-            <input type="submit" value="Змінити аватар" class="sumbitbutton">
-        </form>
-        <form action="/account/{{user}}/changepassword" method="POST" class="changepassword">
-        <input type="password" name="oldpassword" class="password" placeholder="Старий пароль">
-        <input type="password" name="newpassword" class="password" placeholder="Новий пароль">
-        <input type="submit" value="Змінити пароль" class="sumbitbutton">
-        </form>
+        <div class="aboutme">{{user.get_aboutme()}}</div>
+        <a href="/account/folowed" class="changepassword">
+            <input type="submit" value="Вподобані книги" class="sumbitbutton">
+        </a>
+        <a href="/account/created" class="changepassword">
+            <input type="submit" value="Створені книги" class="sumbitbutton">
+        </a>
+        <a href="/account/changedata" class="changepassword">
+            <input type="submit" value="Змінити Дані" class="sumbitbutton">
+        </a>
+        <a href="/logout" class="changepassword">
+            <input type="submit" value="Вийти з акаунта" class="sumbitbutton logout">
+        </a>
     </div>
-{%endblock%}
+{%endblock%}a

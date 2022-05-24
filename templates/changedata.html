@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/account.css">{% endblock %}
+
+{%block content%}
+    <div class="accountfield">
+        <form action="" method="POST" class="changepassword" enctype="multipart/form-data">
+            <label class="custom-file-upload">
+                <input type="file" accept=".jpg, .jpeg, .png" name="loadavatar" id="loadavatar">
+                <span>Загрузити аватар</span>
+            </label>
+            <textarea name="massage" class="textmassage" maxlength="2500" wrap="soft" oninput="auto_grow(this)" placeholder="Про себе"></textarea>
+            <input type="text" name="newusername" class="password" placeholder="Нове імя" value="{{username}}">
+            <input type="email" name="newemail" class="password" placeholder="Нова пошта" value="{{email}}">
+            <input type="password" name="newpassword" class="password" placeholder="Новий пароль">
+            <hr class="separator">
+            <input type="password" name="password" class="password" placeholder="Пароль">
+            <input type="submit" value="Змінити пошту" class="sumbitbutton sumbit">
+        </form>
+    </div>
+{%endblock%}

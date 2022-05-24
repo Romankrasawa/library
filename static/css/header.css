@@ -8,7 +8,7 @@ body a:link{
 .header{
     display: flex;
     flex-direction: row;
-    background-color: rgb(168, 104, 228);
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
     height: 70px;
     width: 100%;
 }
@@ -18,10 +18,11 @@ body a:link{
 }
 .home a{
     display: flex;
+    color:beige;
     flex-direction: row;
 }
 .home a:hover{
-    color: rgb(30, 7, 51);
+    color:rgb(236, 217, 164);
 }
 .home img{
     margin-left: 2%;
@@ -53,27 +54,32 @@ body a:link{
     height: 100%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: rgb(107, 183, 255);
-    border:1px;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border:1.5px;
     border-style: solid;
-    border-color: rgb(16, 16, 85);
     font-weight: bold;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .searchbutton:hover{
-    background-color: rgb(80, 151, 218);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 #searchbar{
     width:85%;
     height:100%;
-    border:1px;
-    border-style: solid;
-    border-color: rgb(16, 16, 85);
     font-size: 15px;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
+
+}
+input{
+    border:0px;
+}
+input:focus{
+    outline: none;
+    box-shadow: 0px 3px 1px 1px rgb(16, 16, 85);
 }
 .addbooklink{
     margin-top: 0.7%;
@@ -86,21 +92,18 @@ body a:link{
     align-items: center;
     justify-content: center;
     float: right;
-    border:1px;
+    border:2px;
     border-style: solid;
-    border-color: rgb(16, 16, 85);
+    border-color: beige;
     height: 50px;
     width: 200px;
-    background-color: rgb(140, 198, 245);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     border-radius: 30px;
 }
 
 .addbook:hover{
-    border:2px;
-    border-style: solid;
-    border-color: rgb(45, 17, 90);
-    border-radius: 30px;
-    background-color: rgb(85, 161, 233);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .accountlink{
     float: right;
@@ -116,7 +119,7 @@ body a:link{
     width: 100%;
     border:2px;
     border-style: solid;
-    border-color: rgb(0, 0, 14);
+    border-color: beige;
     background-color: rgb(194, 191, 191);
     border-radius: 30px;
     overflow: hidden;
@@ -130,10 +133,25 @@ body a:link{
     border-radius: 30px;
 }
 .account:hover{
-    border:3px;
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
+}
+.flash{
+    margin-top: 15px;
+    border:2px;
+    height: 50px;
+    font-weight: bold;
     border-style: solid;
-    border-color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 14);
     border-radius: 30px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.flash.success {
+    background: linear-gradient(90deg,rgb(180, 243, 144),rgb(132, 236, 129),rgb(76, 252, 69),rgb(52, 196, 64),rgb(6, 163, 14));
+}
+.flash.error {
+    background: linear-gradient(90deg,rgb(250, 163, 163),rgb(219, 114, 114),rgb(241, 72, 72),rgb(202, 39, 39),rgb(218, 17, 17));
 }
 .searchtitle{
     display:flex;

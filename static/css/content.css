@@ -1,10 +1,10 @@
 
 .article{
-    border:1px;
+    border:3px;
     border-style: solid;
     border-color: rgb(16, 16, 85);
     margin: 20px;
-    background-color: rgb(182, 138, 223);
+    background:linear-gradient(-90deg, rgb(56, 93, 196),rgb(32, 18, 158),rgb(79, 18, 158),rgb(62, 2, 131),rgb(74, 2, 102));
     height: 550px;
     border-radius: 20px;
 }
@@ -15,6 +15,11 @@
 .searchresult{
     display: flex;
     flex-direction: column;
+}
+h1{
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .searchsort{
     margin-top: 20px;
@@ -28,26 +33,21 @@
     border-color: rgb(45, 17, 90);
     border-radius: 20px;
     margin-bottom: 10px;
-    background-color: aliceblue;
+    background-color:beige;
 }
 .searchsort select:hover{
-    border:2px;
-    border-style: solid;
-    border-color: rgb(45, 17, 90);
-    border-radius: 20px;
-    background-color: rgb(208, 217, 224);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .searchsort input{
-    border:1px;
-    border-style: solid;
-    border-color: rgb(45, 17, 90);
+    border:0px;
     border-radius: 20px;
     font-weight: bold;
-    background-color: rgb(175, 212, 245);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     height:50px;
 }
 .searchsort input:hover{
-    background-color: rgb(132, 188, 236);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 #searchhiden{
     display: none;
@@ -56,7 +56,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(235, 197, 253);
+    background:linear-gradient(180deg, rgb(229, 187, 245),rgb(217, 163, 238),rgb(206, 126, 238));
     width: 100%;
     height:60%;
     border-top-left-radius: 20px;
@@ -78,18 +78,30 @@
     margin-right: 15px;
     font-weight: bold;
     height: 100%;
-    background-color: rgb(217, 124, 240);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     border:2px;
     border-style: solid;
     border-color: rgb(45, 17, 90);
     border-radius: 30px;
 }
 .page:hover{
-    border:3px;
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
+}
+.current_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:50px;
+    margin-right: 15px;
+    font-weight: bold;
+    height: 100%;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border:2px;
     border-style: solid;
     border-color: rgb(45, 17, 90);
-    border-radius: 30px;
-    background-color: rgb(218, 99, 248);
+    border-radius: 10px;   
 }
 .image{
     justify-content: center;
@@ -97,8 +109,8 @@
     display: flex;
     border:2px;
     border-style: solid;
+    color: beige;
     background-color: rgb(124, 124, 124);
-    border-color: rgb(45, 17, 90);
     border-radius: 20px;
     margin-top: 3%;
     margin-bottom: 3%;
@@ -118,15 +130,19 @@
     border-top: 3px;
     border-bottom: 3px;
     line-height: 17px;
-    background-color: rgb(241, 220, 250);
+    background: linear-gradient(-45deg,rgb(255, 249, 233),rgb(240, 224, 202) 30%,rgb(248, 219, 164),rgb(247, 204, 148));
+    padding-top: 1%;
+    padding-bottom: 2%;
     height:30%;
 }
 .text {
     font-size: 15px;
     margin-left: 2%;
-    margin-top: 4%;
+    margin-bottom: 4%;
 }
 .code{
+    margin-top: 1%;
+    color: beige;
     display: flex;
     flex-direction: row;
     height: 6.6%;
@@ -160,30 +176,27 @@
 .chat{
     display: flex;
     font-weight: bold;
-    background-color: rgb(122, 217, 255);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     height:80%;
     width:100%;
     border:1px;
     border-style: solid;
-    border-color: rgb(16, 16, 85);
     align-self: center;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
 }
 .chat:hover{
-    border:2px;
-    border-style: solid;
-    border-color: rgb(45, 17, 90);
-    border-radius: 20px;
-    background-color: rgb(60, 164, 206);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 @media screen and (min-width: 1800px) {
     .description{
-        padding-top: 5%;
+        padding-bottom: 0%;
+        padding-top: 4%;
     }
     .article{
-        height:800px;
+        height:830px;
     }
     .image{
         width: 50%;

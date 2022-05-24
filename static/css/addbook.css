@@ -13,8 +13,8 @@
     margin-top: 2.5%;
     width: 50%;
     height: 600px;
-    background-color: rgb(181, 109, 248);
-    border:1px;
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
+    border:2px;
     border-style: solid;
     border-color: rgb(59, 4, 85);
 }
@@ -34,7 +34,6 @@
     height: 50px;
     width: 98%;
     border-radius: 20px;
-    border:1px;
     border-style: solid;
     border-color: rgb(59, 4, 85);
     font-size: 15px;
@@ -46,14 +45,15 @@
     margin-top:3%;
     height: 60px;
     width:300px;
-    border-radius: 20px;
-    border:1px;
+    border-radius: 30px;
+    border:2px;
     border-style: solid;
-    border-color: rgb(59, 4, 85);
-    background-color: rgb(136, 218, 149);
+    border-color: beige;
+    background: linear-gradient(90deg,rgb(180, 243, 144),rgb(132, 236, 129),rgb(76, 252, 69),rgb(52, 196, 64),rgb(6, 163, 14));
+
 }
 .sumbitbutton:hover{
-    background-color: rgb(77, 190, 96);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .custom-file-upload{
     padding-top: 4%;
@@ -62,25 +62,28 @@
     margin-top: 2%;
     width: 200px;
     height: 40px;
-    background-color: rgb(93, 176, 253);
-    border-radius: 10px;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border-radius: 30px;
     font-weight: bold;
-    border:1px;
+    border:2px;
     border-style: solid;
-    border-color: rgb(85, 4, 24);
 }
 .custom-file-upload:hover{
-    background-color: rgb(50, 136, 216);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 #delete{
-    background-color: rgb(245, 71, 71);
+    background: linear-gradient(90deg,rgb(250, 163, 163),rgb(219, 114, 114),rgb(241, 72, 72),rgb(202, 39, 39),rgb(218, 17, 17));
 }
 #delete:hover{
-    background-color: rgb(214, 55, 55);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 @media screen and (min-width: 1800px) {
     .username{
         margin-top: 0%;
+    }
+    .addbookform{
+        height: 700px;
     }
 }
 @media screen and (max-width: 900px) {

@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border:1px;
+    border:2px;
     border-style: solid;
     border-color: blueviolet;
     border-radius: 30px;
@@ -18,10 +18,10 @@
     margin-top: 4%;
     width:50%;
     height:500px;
-    background-color: rgb(205, 136, 245);
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
 }
 .loginform{
-    border:1px;
+    border:2px;
     border-style: solid;
     border-color: blueviolet;
     border-radius: 30px;
@@ -32,7 +32,12 @@
     margin-top: 4%;
     width:50%;
     height:500px;
-    background-color: rgb(205, 136, 245);
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
+}
+h1{
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(102, 153, 247),rgb(98, 138, 248),rgb(130, 100, 236),rgb(183, 212, 240),rgb(103, 159, 211) 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .loginform h1{
     align-self: center;
@@ -43,9 +48,6 @@
     font-size: 50px;
 }
 .inputfield{
-    border:1px;
-    border-style: solid;
-    border-color: blueviolet;
     border-radius: 10px;
     margin-bottom: 1.5%;
     width: 90%;
@@ -54,26 +56,43 @@
 }
 .sumbitbutton{
     font-weight: bold;
-    border:1px;
+    border:2px;
     border-style: solid;
-    border-color: blueviolet;
-    border-radius: 10px;
+    border-radius: 30px;
     width: 50%;
     height: 50px;
-    background-color: rgb(116, 182, 245);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
 }
 .sumbitbutton:hover{
-    background-color: rgb(61, 133, 192);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .registrationform a{
     font-weight: bold;
     margin-top: 2%;
     align-self: center;
+    color: beige;
 }
 .loginform a{
     font-weight: bold;
     margin-top: 2%;
     align-self: center;
+    color: beige;
+}
+.remember_me{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    height:40px;
+    width: 50%;
+    font-weight: bold;
+    color: beige;
+}
+.remember_me input{
+    width:40px;
+    height: 100%;
 }
 @media screen and (min-width: 1800px) {
     .registrationform{

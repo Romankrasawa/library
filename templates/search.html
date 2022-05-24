@@ -55,7 +55,7 @@
                     <div class="id">
                         Код: {{i["book_id"]}}<br>
                     </div>
-                    <a href="/chat/{{i['book_id']}}">
+                    <a href="/chat/{{i['book_id']}}:page=1">
                         <div class="chat">Обговорення</div>
                     </a>
                     <div class="views">
@@ -67,11 +67,18 @@
 {%endblock%}
 {%block pagination%}
 {%if pages > 1:%}
+    {%if current_page > 2:%}
+    <a href="/search={{searchthing}}:sort={{sort}}/page=1" class="page"><div>First</div></a>
+    {%endif%}
     {%if current_page > 1:%}
         <a href="/search={{searchthing}}:sort={{sort}}/page={{prev}}" class="page"><div>Prew</div></a>
     {%endif%}
+    <div class="current_page">{{current_page}}</div>
     {%if current_page < pages:%}
         <a href="/search={{searchthing}}:sort={{sort}}/page={{next}}" class="page"><div>Next</div></a>
+    {%endif%}
+    {%if current_page < (pages-1):%}
+    <a href="/search={{searchthing}}:sort={{sort}}/page={{pages}}" class="page"><div>Last</div></a>
     {%endif%}
 {%endif%}
 {%endblock%}

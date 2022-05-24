@@ -36,12 +36,14 @@
     {%endif%}
     {%endfor%}
     <div class="chat">
+        {%if current_user%}
         <form action="/addmassage/{{id}}" method="POST">
             <div class="addmassage">
-                <textarea name="massage" class="textmassage" maxlength="2500"></textarea>
+                <textarea name="massage" class="textmassage" maxlength="2500" wrap="soft" oninput="auto_grow(this)"></textarea>
                 <input type="submit" value="Опублікувати" class="public">   
             </div>
         </form>
+        {%endif%}
         <div class="allmassages">
             {% for i in massages%}
                 {%if i["user_id"] == current_user%}
@@ -51,6 +53,11 @@
                             {{i["text"]}}
                         </div>
                         <div class="messagedate">
+                            <a href="/account" class="accountmassagelink">
+                                <div class="accountmassage">
+                                    <img src="/avatar" alt="">
+                                </div>
+                            </a>
                             {{i["time"]}}
                         </div>
                     </div>
@@ -62,12 +69,34 @@
                             {{i["text"]}}
                         </div>
                         <div class="messagedate">
-                            {{i["time"]}}
+                            <span class="date">{{i["time"]}}</span>
+                            <a href="/profile/{{i['user_id']}}" class="accountmassagelink">
+                                <div class="accountmassage">
+                                    <img src="/avatar/{{i['user_id']}}" alt="">
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
                 {%endif%}
             {%endfor%}
+            <div class="pagination">
+                {%if pages > 1:%}
+                {%if current_page > 2:%}
+                <a href="/chat/{{id}}:page=1" class="page"><div>First</div></a>
+                {%endif%}
+                {%if current_page > 1:%}
+                    <a href="/chat/{{id}}:page={{prev}}" class="page"><div>Prew</div></a>
+                {%endif%}
+                <div class="current_page">{{current_page}}</div>
+                {%if current_page < pages:%}
+                    <a href="/chat/{{id}}:page={{next}}" class="page"><div>Next</div></a>
+                {%endif%}
+                {%if current_page < (pages - 1):%}
+                <a href="/chat/{{id}}:page={{pages}}" class="page"><div>Last</div></a>
+                {%endif%}
+            {%endif%}
+            </div>
         </div>
     </div>
 </div>

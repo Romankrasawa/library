@@ -35,6 +35,9 @@
                 </div>
             </a>
     </div>
+    {%for category, flash_massage in get_flashed_messages(True)%}
+    <div class="flash {{category}}">{{flash_massage}}</div>
+    {%endfor%}
     <div class="searchtitle">{%block search%}{%endblock%}</div>
     <div class="content">
     
@@ -47,4 +50,5 @@
     Footer
 </div>  
 </body>
+<script src="../static/js/script.js"></script>
 </html>

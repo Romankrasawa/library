@@ -39,3 +39,6 @@ class UserLogin():
         avatar = self .__user['avatar']
         print("youhoooooooooo")
         return avatar
+    def get_aboutme(self):
+        print("lool",str(self .__user['aboutme']))
+        return self .__user['aboutme']

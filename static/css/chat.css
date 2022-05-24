@@ -2,14 +2,14 @@
     display: flex;
 }
 .chatcontainer{
-    border:1px;
+    border:2px;
     border-style: solid;
     border-color: rgb(45, 17, 90);
     display: flex;
     flex-direction: column;
     width: 80%;
-    min-height: 97%;
-    background-color:rgb(214, 169, 255);
+    min-height: 500px;
+    background: linear-gradient(90deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
     margin-top: 2%;
     margin-bottom: 2%;
     margin-left: 10%;
@@ -18,14 +18,17 @@
 }
 .information{
     display: flex;
+    background:linear-gradient(-90deg, rgb(205, 151, 226),rgb(190, 129, 214),rgb(169, 94, 199));
+    border-radius: 50px;
     flex-direction: row;
     min-height: 500px;
     width: 100%;
+    margin-bottom: 15px;
 }
 .imagebook{
     border:3px;
     border-style: solid;
-    border-color: rgb(45, 17, 90);
+    border-color:beige;
     margin-left: 5.5%;
     margin-right: 2.5%;
     margin-top: 2.5%;
@@ -48,11 +51,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border:1px;
-
+    border:2px;
     border-style: solid;
-    border-color: rgb(45, 17, 90);
-    background-color: rgb(225, 193, 255);
+    border-color:beige;
+    background: linear-gradient(-45deg,rgb(255, 249, 233),rgb(240, 224, 202) 30%,rgb(248, 219, 164),rgb(247, 204, 148));
     padding-left: 2%;
     font-size: 20px;
     margin-top: 3%;
@@ -78,30 +80,28 @@
 .chat{
     display: flex;
     flex-direction: column;
-    background-color: rgb(187, 115, 253);
-    min-height: 350px;
+    min-height: 0px;
 }
 .chat form{
     width: 100%;
-    min-height:00px;
 }
 .addmassage{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height:100%;
+    min-height:0px;
 
 }
 .textmassage{
+    display: flex;
+    flex-wrap: wrap;
     position:relative;
     margin-top: 20px;
     margin-bottom: 20px;
     width: 70%;
-    resize: none;
-    height: 250px;
+    height:32px;
     font-size: 20px;
-    min-height:auto;
     background-color: rgb(253, 227, 227);
     border:1px;
     border-style: solid;
@@ -117,22 +117,21 @@ p{
     height: 100px;
     width: 50%;
     margin-bottom: 20px;
-    border:1px;
+    border:2px;
     border-style: solid;
-    border-color: rgb(45, 17, 90);
-    border-radius: 30px;
-    background-color: rgb(132, 201, 247);
+    border-radius: 50px;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     font-size: 25px;
     font-weight: bold;
 }
 .public:hover{
-    background-color: rgb(70, 176, 247);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .allmassages{
     display: flex;
-    flex-direction: column-reverse;
-    min-height: 100px;
-    background-color: rgb(225, 193, 255);
+    flex-direction: column;
+    min-height: 0px;
     padding-bottom: 25px;
 }
 .massage{
@@ -147,12 +146,12 @@ p{
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 5px;
-    min-width: 15%;
-    max-width:85%;
-    background-color: rgb(245, 232, 173);
+    width: max-content;
+    max-width: 85%;
+    color: beige;
+    background: linear-gradient(90deg,rgb(163, 30, 6),rgb(182, 66, 13),rgb(206, 107, 14),rgb(207, 134, 24),rgb(223, 139, 31),rgb(221, 184, 21));
     border:1px;
     border-style: solid;
-    border-color: rgb(45, 17, 90);
     border-radius: 30px;
 }
 .yourmessage{
@@ -164,25 +163,104 @@ p{
     margin-right: 7px;
     padding-top: 10px;
     padding-bottom: 5px;
-    min-width: 15%;
-    max-width:85%;
-    background-color: rgb(126, 203, 255);
+    padding-right: 10px;
+    width: max-content;
+    max-width: 85%;
+    color: beige;
+    background: linear-gradient(45deg,rgb(126, 151, 218),rgb(103, 128, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(76, 38, 211),rgb(116, 37, 206));
     border:1px;
     border-style: solid;
-    border-color: rgb(45, 17, 90);
     border-radius: 30px;
 }
 .massagetext{
+    display: flex;
+    align-items: center;
     margin-left: 2%;
-    max-width: 80%;
+    padding-left:10px;
+    padding-right: 10px;
+    width: calc(100%-200px);
     font-size: 15px; 
     overflow: hidden;
 }
 .messagedate{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:250px;
     height: 100%;
     margin-left: 2%;
     margin-right: 2%;
     align-self: center;
+}
+.accountmassagelink{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+.accountmassage{
+    height: 100%;
+    width: 100%;
+    border:2px;
+    border-style: solid;
+    border-color: rgb(0, 0, 14);
+    background-color: rgb(194, 191, 191);
+    border-radius: 30px;
+    overflow: hidden;
+
+}
+.accountmassage img{
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width:100%;
+    border-radius: 30px;
+}
+.pagination{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:50px;
+    margin-right: 15px;
+    font-weight: bold;
+    height: 100%;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border:2px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 30px;
+}
+.page:hover{
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
+}
+.current_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:50px;
+    margin-right: 15px;
+    font-weight: bold;
+    height: 100%;
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border:2px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 10px;
 }
 @media screen and (min-width: 1800px) {
     .information{
@@ -201,6 +279,9 @@ p{
     .information{
         flex-direction: column;
         align-items: center;
+    }
+    .date{
+        display: none;
     }
     .bookdescription{
         width: 95%;

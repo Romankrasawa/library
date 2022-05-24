@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{%block title%}{{ title }}{%endblock%}
+{% block css %}<link rel="stylesheet" href="../static/css/account.css">{% endblock %}
+
+{%block content%}
+    <div class="accountfield">
+        <div class="username"><h1>{{username}}</h1></div>
+        <div class="avatar">
+            <img src="/avatar/{{id}}" alt="">
+        </div>
+        <div class="aboutme">{{aboutme}}</div>
+    </div>
+{%endblock%}

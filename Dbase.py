@@ -22,8 +22,6 @@ class FDataBase:
              print("error БД")
         return []
 
-
-
     def add_book(self, name, author, years, pages, company, image, user_id):
         book_id = 0
         self._cur.execute("SELECT MAX(book_id) FROM book")
@@ -46,11 +44,11 @@ class FDataBase:
     def change_book(self, name, author, years, pages, company,book_id, image=None):
         try:
             if image == None:
-                self._cur.execute('UPDATE book SET name=?, pages=?, author=?, year=?, company=?  WHERE book_id = ?;', (name, pages, author, years, company, book_id))
+                self._cur.execute('UPDATE book SET name=?,search_name=?, pages=?, author=?, year=?, company=?  WHERE book_id = ?;', (name, name.lower(), pages, author, years, company, book_id))
             else:
                 binary = sqlite3.Binary(image)
                 print(image)
-                self._cur.execute('UPDATE book SET name=?, pages=?, author=?, year=?, company=?, book_photo=?  WHERE book_id = ?;', (name, pages, author, years, company, image, book_id))
+                self._cur.execute('UPDATE book SET name=?,search_name=?, pages=?, author=?, year=?, company=?, book_photo=?  WHERE book_id = ?;', (name, name.lower(), pages, author, years, company, image, book_id))
         except sqlite3.Error as e:
             print("error БД" + str(e))
             return False
@@ -62,6 +60,7 @@ class FDataBase:
         try:
             print(book_id)
             self._cur.execute(f"DELETE FROM book WHERE book_id = \"{book_id}\";")
+            self._cur.execute(f"DELETE FROM massages WHERE book_id = \"{book_id}\";")
         except sqlite3.Error as e:
             print("error БД" + str(e))
             return False
@@ -83,17 +82,21 @@ class FDataBase:
 
 
     def search(self, searchid,sort, page):
-        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid.lower()}%\";"
+        searchid = "".join([i + "%" for i in searchid.lower()])
+        sql = f"SELECT book_id FROM book WHERE search_name LIKE \"%{searchid}\";"
         try:
             print(sql)
             self._cur.execute(sql)
             paging = self._cur.fetchall()
+            for  i in  paging:
+                for x in i:
+                    print(x)
             print("search completed")
         except:
             print("error БД")
         sort = sort.replace('-', ' ')
         print(sort)
-        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid.lower()}%\" ORDER BY {sort} LIMIT 3 OFFSET {(int(page)-1)*3};"
+        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid}\" ORDER BY {sort} LIMIT 3 OFFSET {(int(page)-1)*3};"
         try:
             print(sql)
             self._cur.execute(sql)
@@ -127,9 +130,37 @@ class FDataBase:
             print("Ошибка получения данных из БД" + str(e))
         return False
 
+    def getUserInfo(self, user_id):
+        try:
+            self._cur.execute(f"SELECT username, aboutme FROM user WHERE user_id={user_id} LIMIT 1")
+            res = self._cur.fetchall()
+            if not res:
+                print("dosnt founded")
+                return False
+            return res
+        except sqlite3.Error as e:
+            print("Ошибка получения данных из БД" + str(e))
+        return False
+
     def getUserByEmail(self, email):
         try:
             self._cur.execute(f"SELECT*FROM user WHERE email='{email}' LIMIT 1")
+            res = self._cur.fetchone()
+            print(res)
+            if not res:
+                print("dosnt founded")
+                return False
+            for i in res:
+                print(i)
+
+            return res
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+        return False
+
+    def getUserByUsername(self, username):
+        try:
+            self._cur.execute(f"SELECT*FROM user WHERE username ='{username}' LIMIT 1")
             res = self._cur.fetchone()
             print(res)
             if not res:
@@ -160,28 +191,47 @@ class FDataBase:
         except sqlite3.Error as e:
             print("errorrr БД:" + str(e))
             return False
-    def updateavatar(self,image, user_id):
+    def updatedata(self,aboutme,username,email,password,image, user_id):
         try:
-            binary = sqlite3.Binary(image)
-            print(binary)
-            self._cur.execute("UPDATE user SET avatar = ? WHERE user_id = ?", (image, user_id))
+            if aboutme:
+                aboutme = f"aboutme = \'{aboutme}\',"
+            else:
+                aboutme = ""
+            if password:
+                password = f"password = \'{password}\',"
+            else:
+                password = ""
+            print(username,email,password)
+            if image:
+                binary = sqlite3.Binary(image)
+                print(binary)
+                self._cur.execute(f"UPDATE user SET {aboutme} {password} avatar = ?,username=?,email=? WHERE user_id = ?", (image,username,email, user_id))
+            else:
+                self._cur.execute(f"UPDATE user SET {aboutme} {password} username=?,email=? WHERE user_id = ?", (username,email, user_id))
             self._db.commit()
-            print("avatar updated")
+            print("data updated")
             return True
         except sqlite3.Error as e:
-            print("errorrr БД:" + str(e))
+            print("errorrr updateБД:" + str(e))
             return False
 
 
-    def checkmassages(self, searchid):
-        sql = f"SELECT * FROM massages WHERE book_id = \"{searchid}\";"
+    def checkmassages(self, book_id, page):
+        sql = f"SELECT * FROM massages WHERE book_id = \"{book_id}\";"
+        try:
+            print(sql)
+            self._cur.execute(sql)
+            paging = self._cur.fetchall()
+            print("search completed")
+        except:
+            print("error БД")
+        sql = f"SELECT * FROM massages WHERE book_id = \"{book_id}\" ORDER BY massage_id DESC LIMIT 3 OFFSET {(int(page) - 1) * 3};"
         try:
             print(sql)
             self._cur.execute(sql)
             result = self._cur.fetchall()
-            print(self._cur.description)
             print("search completed")
-            return result
+            return [result, len(paging)]
         except:
             print("error БД")
         return []
@@ -200,6 +250,17 @@ class FDataBase:
              print("error БД")
              return False
 
+    def getavatar(self, id):
+        sql= f'SELECT avatar FROM user WHERE user_id = {id}'
+        try:
+             self._cur.execute(sql)
+             res = self._cur.fetchone()
+             if res:
+                 for i in res:
+                    return i
+        except sqlite3.Error as e:
+             print("error БД:" + str(e))
+        return []
 
     def getpicture(self, id):
         sql= f'SELECT book_photo FROM book WHERE book_id = \"{id}\"'

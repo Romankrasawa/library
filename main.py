@@ -21,6 +21,8 @@ app.config.update(dict(DATABASE=os.path.join(app.root_path,'site.db')))
 
 login_manager=LoginManager(app)
 login_manager.login_view = "login"
+login_manager.login_message = "Щоб отримати доступ ввійдіть в аккаунт"
+login_manager.login_message_category = "error"
 
 def connect_db():
     conn = sqlite3.connect(app.config["DATABASE"])
@@ -67,19 +69,32 @@ def showpicture(id):
     image = dbase.getpicture(id)
     return Response(image, mimetype='image/png')
 
+@app.route("/avatar/<user_id>", methods = ['POST','GET'])
+def showotheravatar(user_id):
+    db = get_db()
+    dbase = FDataBase(db)
+    image = dbase.getavatar(user_id)
+    return Response(image, mimetype='image/png')
+
 @app.route("/avatar", methods = ['POST','GET'])
-def showavatar():
-    image = current_user.get_avatar()
-    print("chotko")
+def showmyavatar():
+    if current_user.is_authenticated:
+        image = current_user.get_avatar()
+        print("chotko")
+    else:
+        with open("static/image/default-profile.png", "rb") as img:
+            image = img.read()
+    print(image)
     return Response(image, mimetype='image/png')
 
 @app.errorhandler(404)
 def errorpage(error) :
     return render_template("errorpage.html", title="Error 404")
 
-@app.route("/logout")
+@app.route("/logout", methods = ['POST','GET'])
 def logout():
     logout_user()
+    flash("Ви вийшли з аккаунта", category='success')
     return redirect(url_for("login"))
 
 
@@ -95,18 +110,35 @@ def addmassage(id):
     dbase = FDataBase(db)
     if request.method == 'POST':
         print(id)
-        print(dbase.add_massage(request.form["massage"], datetime.datetime.now().strftime("%Y-%m-%d-%H.%M.%S"), id, current_user.get_id()))
-        return redirect(url_for("chat", code = id))
+        if len(request.form["massage"]) > 0:
+            print(dbase.add_massage(request.form["massage"], datetime.datetime.now().strftime("%Y-%m-%d-%H.%M.%S"), id, current_user.get_id()))
+            flash("Ви додали коментар", category='success')
+        else:
+            flash("Некоректне повідомляення", category='error')
+        return redirect(url_for("chat", code = id, page=1))
 
-@app.route("/chat/<code>", methods = ['POST','GET'])
-def chat(code):
+@app.route("/chat/<code>:page=<page>", methods = ['POST','GET'])
+def chat(code, page):
     db = get_db()
     dbase = FDataBase(db)
+    description = dbase.search_id(code)
+    if not description:
+        flash("Книга не знайдена", category='error')
+        return redirect("/home")
     print(code)
-    for i in dbase.checkmassages(code):
-        print(i)
+    result = dbase.checkmassages(code, page)
+    massages = result[0]
+    paging = result[1]
+    print(page, paging)
+    pages = ceil(paging / 3) if ceil(paging / 3) > 0 else 1
+    if 1 > int(page) or int(page) > pages:
+        flash("Cторінка не знайдена", category='error')
+        return redirect(f"/chat/{code}:page=1")
+    next = int(page) + 1 if int(page) < pages else int(page)
+    prev = int(page) -1 if int(page) > 1 else 1
     dbase.addview(code)
-    return render_template("chat.html", title="Library chat", massages = dbase.checkmassages(code), description = dbase.search_id(code), id = code, current_user=current_user.get_id())
+    print(paging,page,next,prev)
+    return render_template("chat.html", title="Library chat", massages = massages, description = description, id = code, current_user=current_user.get_id(), searching = paging, pages = int(pages), next = next, prev = prev, current_page=int(page))
 
 
 
@@ -155,10 +187,27 @@ def register():
     if request.method == "POST":
         db = get_db()
         dbase = FDataBase(db)
-        with open(f"static/image/deffault_{randint(1,6)}.png", "rb") as img:
-            image = img.read()
-        dbase.registrate(request.form["username"],request.form["email"],generate_password_hash(request.form["password"]), image)
-        return redirect("login")
+        if not "@" in request.form["username"]:
+            if not dbase.getUserByUsername(request.form["username"]):
+                if not dbase.getUserByEmail(request.form["email"]):
+                    if request.form["password"] == request.form["repeatpassword"]:
+                        if len(request.form["password"]) >= 8:
+                            with open(f"static/image/deffault_{randint(1,6)}.png", "rb") as img:
+                                image = img.read()
+                            dbase.registrate(request.form["username"],request.form["email"],generate_password_hash(request.form["password"]), image)
+                            flash("Ви успішно зареєструвалися", category='success')
+                            return redirect("login")
+                        else:
+                            flash("Введіть пароль довжиною від 8 символів", category='error')
+                    else:
+                        flash("Паролі не збігаються", category='error')
+                else:
+                    flash("Така пошта уже існує", category='error')
+            else:
+                flash("Таке ім'я уже існує", category='error')
+        else:
+            flash("Некоректне ім'я", category='error')
+        return redirect("register")
     return render_template("register.html", title="Registration")
 
 
@@ -168,19 +217,49 @@ def login():
     if request.method == "POST":
         db = get_db()
         dbase = FDataBase(db)
-        user = dbase.getUserByEmail(request.form['email'])
-        if user and check_password_hash(user['password'], request.form['password']):
-            userlogin = UserLogin().create(user)
-            print(userlogin)
-            login_user(userlogin)
-            print("okey")
-            return redirect(url_for('account'))
+        if "@" in request.form['email']:
+            user = dbase.getUserByEmail(request.form['email'])
+        else:
+            user = dbase.getUserByUsername(request.form['email'])
+        if user:
+            if check_password_hash(user['password'], request.form['password']):
+                userlogin = UserLogin().create(user)
+                print(userlogin)
+                print(request.form.get('remember_me'))
+                remember_me = True if request.form.get('remember_me') else False
+                login_user(userlogin,remember=remember_me)
+                print("okey")
+                print(remember_me)
+                flash("Ви успішно ввійшли в аккаунт", category='success')
+                return redirect(url_for('account'))
+            else:
+                flash("Пароль не підходить", category='error')
+        else:
+            flash("Не знайдено аккаунт з таким іменем або поштою", category='error')
     if current_user.get_id() == None:
         return render_template("login.html", title="Log in")
     else:
         return redirect(url_for('account'))
 
-
+@app.route("/profile/<id>")
+def profile(id):
+    if int(id) == current_user.get_id():
+        return redirect("/account")
+    print(current_user.get_id())
+    db = get_db()
+    dbase = FDataBase(db)
+    user = dbase.getUserInfo(id)
+    if not user:
+        flash("Профіль не знайдений", category='error')
+        return redirect("/home")
+    print("toooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooop")
+    username = ''
+    for i in user:
+        print(i)
+        username = i[0]
+        aboutme = i[1]
+    print("okeey", username)
+    return render_template("profile.html", title=f"Profile {username}" , username= username, id = id, aboutme = aboutme)
 
 @app.route("/account")
 @login_required
@@ -201,16 +280,22 @@ def addbook():
     if request.method == "POST":
         db = get_db()
         dbase = FDataBase(db)
-        if not request.files["cover"]:
-            with open("static/image/deffault_cover.png", "rb") as img:
-                image = img.read()
+        if not "#" in request.form["name"]:
+            if not request.files["cover"]:
+                with open("static/image/deffault_cover.png", "rb") as img:
+                    image = img.read()
+            else:
+                image = request.files['cover'].read()
+            print(image)
+            result, book_id = dbase.add_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], image, current_user.get_id())
+            print(result,book_id)
+            if result:
+                flash("Книга була додана успішно", category='success')
+                return redirect((url_for("chat", code = book_id, page=1)))
+            else:
+                flash("Виникла помилка під час додавання книги", category='error')
         else:
-            image = request.files['cover'].read()
-        print(image)
-        result, book_id = dbase.add_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], image, current_user.get_id())
-        print(result,book_id)
-        if result:
-            return redirect((url_for("chat", code = book_id)))
+            flash("Некоректна назва", category='error')
     return render_template("addbook.html", title="Add book", current_year =datetime.datetime.now().strftime("%Y"))
 
 @app.route("/changebook/<id>", methods = ['POST','GET'])
@@ -223,12 +308,18 @@ def changebook(id):
     for i in description:
         user_id = i["user_id"]
     if request.method == "POST":
-        if not request.files["cover"]:
-            result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id)
+        if not "#" in request.form["name"]:
+            if not request.files["cover"]:
+                result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id)
+            else:
+                result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id, image = request.files['cover'].read())
+            if result:
+                flash("Книга була змінена успішно", category='success')
+                return redirect(url_for("chat", code=id, page=1))
+            else:
+                flash("Виникла помилка під час зміни книги", category='error')
         else:
-            result = dbase.change_book(request.form["name"], request.form["author"], int(request.form["years"]), int(request.form["pages"]), request.form["company"], id, image = request.files['cover'].read())
-        if result:
-            return redirect(url_for("chat", code=id))
+            flash("Некоректна назва", category='error')
     if description and user_id == current_user.get_id():
         return render_template("changebook.html", title="Add book", current_year =datetime.datetime.now().strftime("%Y") , information = description, id =id)
     else:
@@ -244,19 +335,58 @@ def deletebook(id):
     for i in description:
         user_id = i["user_id"]
     if user_id == current_user.get_id():
-        dbase.delete_book(id)
-        print('deleted')
+        res = dbase.delete_book(id)
+        if res:
+            flash("Книга була видалена успішно", category='success')
+        else:
+            flash("Виникла помилка під час видалення книги", category='error')
     return redirect("/home")
 
-@app.route("/account/changeavatar", methods = ['POST'])
-def changeavatar():
+
+
+@app.route("/account/changedata", methods = ['POST','GET'])
+def changedata():
     if request.method == "POST":
         db = get_db()
         dbase = FDataBase(db)
-        if request.files["loadavatar"]:
-            dbase.updateavatar( request.files["loadavatar"].read(), current_user.get_id())
-            print("suuuuuuuppppppppeeeeeerrrr")
-    return redirect("/account")
+        if check_password_hash(current_user.get_password(), request.form['password']):
+            if not "@" in request.form["newusername"]:
+                if not (dbase.getUserByUsername(request.form["newusername"]) and request.form["newusername"] != current_user.get_username()):
+                    if not (dbase.getUserByEmail(request.form["newemail"]) and request.form["newemail"] != current_user.get_email()):
+                        if request.form['newpassword']:
+                            if len(request.form["newpassword"]) >= 8:
+                                password = generate_password_hash(request.form['newpassword'])
+                            else:
+                                flash("Введіть пароль довжиною від 8 символів", category='error')
+                                return redirect("/account/changedata")
+                        else:
+                            password = None
+                        if request.form['massage']:
+                            aboutme = request.form['massage']
+                        else:
+                            aboutme = None
+                        if request.files["loadavatar"]:
+                            print("cool")
+                            avatar = request.files["loadavatar"].read()
+                        else:
+                            print("not cool")
+                            avatar = None
+                        print("suuuuuuuppppppppeeeeeerrrr")
+                        res = dbase.updatedata(aboutme,request.form['newusername'], request.form['newemail'],password, avatar, current_user.get_id())
+                        if res:
+                            flash("Дані було змінено успішно", category='success')
+                        else:
+                            flash("Виникла помилка під зміни даних", category='error')
+                        return redirect("/account")
+                    else:
+                        flash("Така пошта уже існує", category='error')
+                else:
+                    flash("Таке ім'я уже існує", category='error')
+            else:
+                flash("Некоректне ім'я", category='error')
+        else:
+                flash("Пароль не підходить", category='error')
+    return render_template("changedata.html", username = current_user.get_username(), email = current_user.get_email())
 
 
 

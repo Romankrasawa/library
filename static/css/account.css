@@ -7,15 +7,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border-radius: 50px;
     margin-top: 2.5%;
     width: 50%;
-    height: 740px;
-    background-color: rgb(181, 109, 248);
-    border:1px;
+    min-height: 740px;
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
+    border:2px;
     border-style: solid;
     border-color: rgb(59, 4, 85);
+    padding-bottom: 20px;
 }
+
 .avatar{
     width: 200px;
     height: 200px;
@@ -23,8 +26,35 @@
     border-radius: 120px;
     border:5px;
     border-style: solid;
-    border-color: rgb(59, 4, 85);
+    border-color:beige;
     overflow: hidden;
+}
+.aboutme{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: beige;
+    font-weight: bold;
+    height:auto;
+}
+.textmassage{
+    display: flex;
+    flex-wrap: wrap;
+    position:relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 95%;
+    height:32px;
+    font-weight: bold;
+    font-size: 20px;
+    border:1px;
+    border-style: solid;
+    border-color: rgb(45, 17, 90);
+    border-radius: 15px;
+    overflow:auto;
 }
 .avatar img{
     width:100%;
@@ -46,8 +76,9 @@
     flex-direction: column;
 }
 .username{
-    color:rgb(248, 120, 145);
-    text-shadow: 0px 0px 4px rgb(221, 90, 117);
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(102, 153, 247),rgb(98, 138, 248),rgb(130, 100, 236),rgb(183, 212, 240),rgb(103, 159, 211) 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-top: 1%;
     font-size: 27px;
 }
@@ -56,9 +87,6 @@
     height: 50px;
     width: 98%;
     border-radius: 20px;
-    border:1px;
-    border-style: solid;
-    border-color: rgb(59, 4, 85);
     font-size: 15px;
     font-weight: bold;
 }
@@ -68,38 +96,54 @@
     margin-top:3%;
     height: 60px;
     width:300px;
-    border-radius: 20px;
-    border:1px;
+    border-radius: 30px;
+    border:2px;
     border-style: solid;
-    border-color: rgb(59, 4, 85);
-    background-color: rgb(93, 176, 253);
+    color: beige;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+
+}
+.sumbitbutton.sumbit{
+    background: linear-gradient(90deg,rgb(180, 243, 144),rgb(132, 236, 129),rgb(76, 252, 69),rgb(52, 196, 64),rgb(6, 163, 14));
+    color: black;
+    border-color: beige;
+}
+.sumbitbutton.logout{
+    background: linear-gradient(90deg,rgb(250, 163, 163),rgb(219, 114, 114),rgb(241, 72, 72),rgb(202, 39, 39),rgb(218, 17, 17));
 }
 .sumbitbutton:hover{
-    background-color: rgb(50, 136, 216);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 
 #loadavatar{
     display:none;
 }
 .custom-file-upload{
-    padding-top: 5%;
-    padding-left: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 2%;
-    width: 200px;
-    height: 40px;
-    background-color: rgb(248, 120, 145);
-    border-radius: 10px;
+    width: 250px;
+    height: 70px;
+    background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
+    border-radius: 35px;
     font-weight: bold;
     border:1px;
     border-style: solid;
-    border-color: rgb(85, 4, 24);
+    color: beige;
 }
 .custom-file-upload:hover{
-    background-color: rgb(221, 90, 117);
+    box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .addavatar{
     height: 30px;
     margin-top: 3%;
+}
+.separator{
+    width: 100%;
+    margin-top: 4.5%;
+    border-width: 2.5px;
+    border-color: rgb(91, 15, 163);
 }
 @media screen and (min-width: 1800px) {
     .username{

@@ -3,7 +3,7 @@
 {%block title%}{{ title }}{%endblock%}
 {% block css %}<link rel="stylesheet" href="../static/css/content.css">{% endblock %}
 {%block search%}
-<h1>Топ {{description|length}} найпопулярніших книг</h1>
+<h1 class="searchtitle">Топ {{description|length}} найпопулярніших книг</h1>
 {%endblock%}
 {%block content%}
         
@@ -36,7 +36,7 @@
                     <div class="id">
                         Код: {{i["book_id"]}}<br>
                     </div>
-                    <a href="/chat/{{i['book_id']}}">
+                    <a href="/chat/{{i['book_id']}}:page=1">
                         <div class="chat">Обговорення</div>
                     </a>
                     <div class="views">
