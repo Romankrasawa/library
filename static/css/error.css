@@ -17,7 +17,9 @@
     height: 100px;
     font-size: 50px;
     font-weight: bold;
-    color: darkslateblue;
+    background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .errorimage{
     width: 800px;

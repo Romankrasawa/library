@@ -42,3 +42,6 @@ class UserLogin():
     def get_aboutme(self):
         print("lool",str(self .__user['aboutme']))
         return self .__user['aboutme']
+    def get_folowed(self):
+        print("lool",str(self .__user['folowed']))
+        return str(self .__user['folowed'])

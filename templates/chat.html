@@ -28,12 +28,22 @@
             </div>
         </div>
     </div>
+    <div class="use">
     {%if i["user_id"] == current_user%}
-    <div class="addfavourite">
-        
-           <a href="/changebook/{{id}}"><input type="button" value="Змінити книгу" class="public" id ="favorite"></a>
-    </div>
+        <div class="changebook">
+            <a href="/changebook/{{id}}"><input type="button" value="Змінити книгу" id ="favorite"></a>
+        </div>
     {%endif%}
+    {%if current_user%}
+        <div class="addfavourite">
+            {%if liked%}
+            <a href="/deletefolow/{{i['book_id']}}"><img src="../static/image/like.png" alt=""></a>
+            {%else%}
+            <a href="/addfolow/{{i['book_id']}}"><img src="../static/image/like.png" alt=""></a>
+            {%endif%}
+        </div>
+    {%endif%}
+    </div>
     {%endfor%}
     <div class="chat">
         {%if current_user%}

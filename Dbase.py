@@ -96,7 +96,7 @@ class FDataBase:
             print("error БД")
         sort = sort.replace('-', ' ')
         print(sort)
-        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid}\" ORDER BY {sort} LIMIT 3 OFFSET {(int(page)-1)*3};"
+        sql = f"SELECT * FROM book WHERE search_name LIKE \"%{searchid}\" ORDER BY {sort} LIMIT 9 OFFSET {(int(page)-1)* 9 };"
         try:
             print(sql)
             self._cur.execute(sql)
@@ -107,6 +107,93 @@ class FDataBase:
             print("error БД")
         return []
 
+    def created(self, user_id, sort, page):
+        sql = f"SELECT book_id FROM book WHERE user_id = {user_id};"
+        try:
+            print(sql)
+            self._cur.execute(sql)
+            paging = self._cur.fetchall()
+            for i in paging:
+                for x in i:
+                    print(x)
+            print("search completed")
+        except:
+            print("error БД")
+        sort = sort.replace('-', ' ')
+        print(sort)
+        sql = f"SELECT * FROM book WHERE user_id = {user_id} ORDER BY {sort} LIMIT 9 OFFSET {(int(page) - 1) * 9};"
+        try:
+            print(sql)
+            self._cur.execute(sql)
+            result = self._cur.fetchall()
+            print("search completed")
+            return [result, len(paging)]
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+        return []
+
+    def deletefolow(self, user_id, folowed, book_id):
+        print(user_id)
+        book_id = book_id
+        folowed = folowed.translate("".maketrans("","",book_id))
+        print(folowed)
+        sql = f"UPDATE user SET folowed = \"{folowed}\" WHERE user_id = {user_id}"
+        print(sql)
+        try:
+            self._cur.execute(sql)
+            self._db.commit()
+            paging = self._cur.fetchall()
+            for i in paging:
+                for x in i:
+                    print(x)
+            print("folowed added")
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+
+    def addfolow(self, user_id, folowed, book_id):
+        print(user_id)
+        folowed = folowed + book_id + " "
+        print(folowed)
+        sql = f"UPDATE user SET folowed = \"{folowed}\" WHERE user_id = {user_id}"
+        print(sql)
+        try:
+            self._cur.execute(sql)
+            self._db.commit()
+            paging = self._cur.fetchall()
+            for i in paging:
+                for x in i:
+                    print(x)
+            print("folowed added")
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+
+    def folowed(self, user_id, sort, page):
+        print(user_id)
+        folowed = tuple(user_id.split(" "))
+        print(folowed)
+        sql = f"SELECT book_id FROM book WHERE book_id in {folowed};"
+        try:
+            print(sql)
+            self._cur.execute(sql)
+            paging = self._cur.fetchall()
+            for i in paging:
+                for x in i:
+                    print(x)
+            print("search completed")
+        except:
+            print("error БД")
+        sort = sort.replace('-', ' ')
+        print(sort)
+        sql = f"SELECT * FROM book WHERE book_id in {folowed} ORDER BY {sort} LIMIT 9 OFFSET {(int(page) - 1) * 9};"
+        try:
+            print(sql)
+            self._cur.execute( sql)
+            result = self._cur.fetchall()
+            print("search completed")
+            return [result, len(paging)]
+        except sqlite3.Error as e:
+            print("error БД" + str(e))
+        return []
 
     def registrate(self, username, email, password, avatar):
         try:
@@ -127,7 +214,7 @@ class FDataBase:
                 return False
             return res
         except sqlite3.Error as e:
-            print("Ошибка получения данных из БД" + str(e))
+            print("error БД" + str(e))
         return False
 
     def getUserInfo(self, user_id):
@@ -139,7 +226,7 @@ class FDataBase:
                 return False
             return res
         except sqlite3.Error as e:
-            print("Ошибка получения данных из БД" + str(e))
+            print("error БД" + str(e))
         return False
 
     def getUserByEmail(self, email):
@@ -225,7 +312,7 @@ class FDataBase:
             print("search completed")
         except:
             print("error БД")
-        sql = f"SELECT * FROM massages WHERE book_id = \"{book_id}\" ORDER BY massage_id DESC LIMIT 3 OFFSET {(int(page) - 1) * 3};"
+        sql = f"SELECT * FROM massages WHERE book_id = \"{book_id}\" ORDER BY massage_id DESC LIMIT 15 OFFSET {(int(page) - 1) * 15};"
         try:
             print(sql)
             self._cur.execute(sql)

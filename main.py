@@ -98,11 +98,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-
-@app.route("/about")
-def about():
-    return render_template("aboutsite.html", title="About site")
-
 @app.route("/addmassage/<id>", methods = ['POST','GET'])
 @login_required
 def addmassage(id):
@@ -117,6 +112,33 @@ def addmassage(id):
             flash("Некоректне повідомляення", category='error')
         return redirect(url_for("chat", code = id, page=1))
 
+@app.route("/deletefolow/<id>", methods = ['POST','GET'])
+@login_required
+def deletefolow(id):
+    db = get_db()
+    dbase = FDataBase(db)
+    print("id =     ",id,current_user.get_folowed())
+    if id in current_user.get_folowed():
+        dbase.deletefolow(current_user.get_id(),current_user.get_folowed(),id)
+        flash("Ця книга була видалена з вподобаних", category='success')
+        print('okey')
+    else:
+        flash("Ця книга уже немає у вподобаних", category='error')
+    return redirect(url_for("chat", code = id, page=1))
+
+@app.route("/addfolow/<id>", methods = ['POST','GET'])
+@login_required
+def addfolow(id):
+    db = get_db()
+    dbase = FDataBase(db)
+    print("id =     ",id,current_user.get_folowed())
+    if not id in current_user.get_folowed():
+        dbase.addfolow(current_user.get_id(),current_user.get_folowed(),id)
+        flash("Ця книга була добавлена до вподобаних", category='success')
+    else:
+        flash("Ця книга уже у вподобаних", category='error')
+    return redirect(url_for("chat", code = id, page=1))
+
 @app.route("/chat/<code>:page=<page>", methods = ['POST','GET'])
 def chat(code, page):
     db = get_db()
@@ -130,15 +152,19 @@ def chat(code, page):
     massages = result[0]
     paging = result[1]
     print(page, paging)
-    pages = ceil(paging / 3) if ceil(paging / 3) > 0 else 1
+    pages = ceil(paging / 15) if ceil(paging / 15) > 0 else 1
     if 1 > int(page) or int(page) > pages:
         flash("Cторінка не знайдена", category='error')
         return redirect(f"/chat/{code}:page=1")
     next = int(page) + 1 if int(page) < pages else int(page)
     prev = int(page) -1 if int(page) > 1 else 1
     dbase.addview(code)
+    if code in current_user.get_folowed():
+        liked = True
+    else:
+        liked =False
     print(paging,page,next,prev)
-    return render_template("chat.html", title="Library chat", massages = massages, description = description, id = code, current_user=current_user.get_id(), searching = paging, pages = int(pages), next = next, prev = prev, current_page=int(page))
+    return render_template("chat.html", title="Library chat", massages = massages, description = description, id = code, current_user=current_user.get_id(), searching = paging, pages = int(pages), next = next, prev = prev, current_page=int(page), liked=liked)
 
 
 
@@ -174,12 +200,57 @@ def searchthing(searchbar,sort, page):
     result = dbase.search(searchbar,sort, page)
     search_ = result[0]
     paging = result[1]
-    print(search_,paging)
-    pages = ceil(paging / 3)
-    next = int(page) + 1 if int(page) < pages else page
-    prev = int(page) -1 if int(page) > 1 else 1
+    pages = ceil(paging / 9) if ceil(paging / 9) > 0 else 1
+    if 1 > int(page) or int(page) > pages:
+        flash("Cторінка не знайдена", category='error')
+        return redirect(f"/search={searchbar}:sort={sort}/page=1")
+    next = int(page) + 1 if int(page) < pages else int(page)
+    prev = int(page) - 1 if int(page) > 1 else 1
     return render_template("search.html", title=f"{searchbar}".replace('_', ' '), search = search_, searchthing = searchbar, searching = paging, pages = pages, next = next, prev = prev, sort =sort, current_page=int(page))
 
+@app.route("/account:created", methods = ["POST"])
+@login_required
+def create():
+    return redirect(f"/account:created:sort={request.form['sort']}/page=1")
+
+@app.route("/account:created:sort=<sort>/page=<page>")
+@login_required
+def created(sort, page):
+    db = get_db()
+    dbase = FDataBase(db)
+    print(sort ,page)
+    result = dbase.created(current_user.get_id(),sort, page)
+    search_ = result[0]
+    paging = result[1]
+    pages = ceil(paging / 9) if ceil(paging / 9) > 0 else 1
+    if 1 > int(page) or int(page) > pages:
+        flash("Cторінка не знайдена", category='error')
+        return redirect(f"/account:created:sort={sort}/page=1")
+    next = int(page) + 1 if int(page) < pages else int(page)
+    prev = int(page) - 1 if int(page) > 1 else 1
+    return render_template("created.html", search = search_, searching = paging, pages = pages, next = next, prev = prev, sort =sort, current_page=int(page))
+
+@app.route("/account:folowed", methods = ["POST"])
+@login_required
+def folow():
+    return redirect(f"/account:folowed:sort={request.form['sort']}/page=1")
+
+@app.route("/account:folowed:sort=<sort>/page=<page>")
+@login_required
+def folowed(sort, page):
+    db = get_db()
+    dbase = FDataBase(db)
+    print(sort ,page)
+    result = dbase.folowed(current_user.get_folowed(),sort, page)
+    search_ = result[0]
+    paging = result[1]
+    pages = ceil(paging / 9) if ceil(paging / 9) > 0 else 1
+    if 1 > int(page) or int(page) > pages:
+        flash("Cторінка не знайдена", category='error')
+        return redirect(f"/account:folowed:sort={sort}/page=1")
+    next = int(page) + 1 if int(page) < pages else int(page)
+    prev = int(page) - 1 if int(page) > 1 else 1
+    return render_template("folowe.html", search = search_, searching = paging, pages = pages, next = next, prev = prev, sort =sort, current_page=int(page))
 
 
 @app.route("/register", methods = ['POST','GET'])
@@ -390,12 +461,6 @@ def changedata():
 
 
 
-@app.route("/account/<username>/changepassword")
-def changepassword(username):
-    return render_template("account.html", title="Account", user= username)
-
-
-
 if __name__ == "__main__":
     create_db()
-    app.run(debug=True)
+    app.run(debug=False)

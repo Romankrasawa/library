@@ -4,6 +4,31 @@
     margin-top: 15px;
     color: beige;
     background: linear-gradient(75deg,rgb(56, 7, 121),rgb(108, 17, 182),rgb(122, 29, 228),rgb(134, 51, 243),rgb(153, 46, 241),rgb(189, 41, 248));
-    min-height: 120px;
+    min-height: 125px;
+    padding-top: 35px;
     width: 100%;
+}
+.links{
+    margin-left: 30px;
+}
+.link a{
+    color: beige;
+}
+.link{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+.link img{
+    width:25px;
+    height:25px;
+}
+.footer_info{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    float: right;
 }

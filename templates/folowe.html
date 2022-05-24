@@ -8,7 +8,7 @@
 
 {%block search%}
 {%if searching > 1:%}
-    <form action="/search" method="post" class="searchsort">
+    <form action="/account:folowed" method="post" class="searchsort">
             <select name="sort">
                 <option value="name-DESC">По назві(Я до А)</option>
                 <option value="name-ASC">По назві(А до Я)</option>
@@ -21,10 +21,7 @@
             <input type="submit" value="Cортувати">
     </form>
 {%endif%}
-<div class="searchresult">
-    <h1>Пошук {{title}}</h1>
-    <div>Знайдено результатів {{searching}}</div>
-</div>
+<h1>Вподобані книги книги</h1>
 {%endblock%}
 {%block content%}
     {% for i in search %}
@@ -68,17 +65,17 @@
 {%block pagination%}
 {%if pages > 1:%}
     {%if current_page > 2:%}
-    <a href="/search={{searchthing}}:sort={{sort}}/page=1" class="page"><div>First</div></a>
+    <a href="/account:folowed:sort={{sort}}/page=1" class="page"><div>First</div></a>
     {%endif%}
     {%if current_page > 1:%}
-        <a href="/search={{searchthing}}:sort={{sort}}/page={{prev}}" class="page"><div>Prew</div></a>
+        <a href="/account:folowed:sort={{sort}}/page={{prev}}" class="page"><div>Prew</div></a>
     {%endif%}
     <div class="current_page">{{current_page}}</div>
     {%if current_page < pages:%}
-        <a href="/search={{searchthing}}:sort={{sort}}/page={{next}}" class="page"><div>Next</div></a>
+        <a href="/account:folowed:sort={{sort}}/page={{next}}" class="page"><div>Next</div></a>
     {%endif%}
     {%if current_page < (pages-1):%}
-    <a href="/search={{searchthing}}:sort={{sort}}/page={{pages}}" class="page"><div>Last</div></a>
+    <a href="/account:folowed:sort={{sort}}/page={{pages}}" class="page"><div>Last</div></a>
     {%endif%}
 {%endif%}
 {%endblock%}
