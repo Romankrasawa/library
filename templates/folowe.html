@@ -25,7 +25,7 @@
 {%endblock%}
 {%block content%}
     {% for i in search %}
-            <div class="article">
+            <div class="article js-scroll">
                 <div class="photo">
                     <div class="image">
                         <img src="{{url_for('showpicture', id = i['book_id'])}}" alt="">

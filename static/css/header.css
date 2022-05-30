@@ -107,9 +107,11 @@ textarea:focus{
     color: beige;
     background: linear-gradient(45deg,rgb(183, 212, 240),rgb(103, 159, 211) 30%,rgb(53, 119, 241),rgb(41, 96, 248),rgb(88, 46, 241),rgb(141, 51, 243));
     border-radius: 30px;
+    transition: all 0.5s ease 0s;
 }
 
 .addbook:hover{
+    transform: scale(1.05);
     box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .accountlink{
@@ -130,7 +132,7 @@ textarea:focus{
     background-color: rgb(194, 191, 191);
     border-radius: 30px;
     overflow: hidden;
-
+    transition: all 0.5s ease 0s;
 }
 .account img{
     object-fit: cover;
@@ -140,6 +142,7 @@ textarea:focus{
     border-radius: 30px;
 }
 .account:hover{
+    transform: scale(1.05);
     box-shadow: 2px 2px 1px 1px rgb(16, 16, 85);
 }
 .flash{

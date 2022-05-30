@@ -13,7 +13,7 @@ from random import randint
 
 DATABASE='site.db'
 DEBUG=True
-SECRET_KEY='fdgfh78@#5?>gfhf89dx, v06k'
+SECRET_KEY='fdgfh78@#5?06k'
 
 app=Flask(__name__)
 app.config.from_object(__name__)
@@ -83,6 +83,7 @@ def showmyavatar():
         print("chotko")
     else:
         with open("static/image/default-profile.png", "rb") as img:
+            print("toppppppppp")
             image = img.read()
     print(image)
     return Response(image, mimetype='image/png')
@@ -159,10 +160,13 @@ def chat(code, page):
     next = int(page) + 1 if int(page) < pages else int(page)
     prev = int(page) -1 if int(page) > 1 else 1
     dbase.addview(code)
-    if code in current_user.get_folowed():
-        liked = True
-    else:
-        liked =False
+    try:
+        if code in current_user.get_folowed():
+            liked = True
+        else:
+            liked =False
+    except:
+        liked = False
     print(paging,page,next,prev)
     return render_template("chat.html", title="Library chat", massages = massages, description = description, id = code, current_user=current_user.get_id(), searching = paging, pages = int(pages), next = next, prev = prev, current_page=int(page), liked=liked)
 

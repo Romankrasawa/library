@@ -35,13 +35,11 @@
     margin-bottom: 2.5%;
     background-color: gray;
     height: 420px;
-    width: 300px;
     border-radius: 30px;
     overflow: hidden;
 }
 .imagebook img{
     height: 100%;
-    width: 100%;
     object-fit: cover;
     object-position: center;
     border-radius: 30px;
@@ -291,7 +289,6 @@ p{
     }
     .imagebook{
         height: 80%;
-        width: 25%;
     }
     .bookdescription{
         font-size: 30px;
@@ -333,7 +330,6 @@ p{
 }
 @media screen and (max-width: 390px) {
     .imagebook{
-        width: 220px;
         height:310px;
     }
     .bookdescription{
